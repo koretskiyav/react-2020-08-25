@@ -18,6 +18,7 @@ function Product(props) {
       <button onClick={increment}>
         <Plus />
       </button>
+      <br />
     </div>
   );
 }
