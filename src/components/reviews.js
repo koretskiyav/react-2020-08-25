@@ -5,11 +5,11 @@ function Reviews(props) {
   return (
     <div>
       {props.reviews.map((review) => (
-        <>
+        <div key={review.id}>
           <p>user - {review.user}</p>
           <p>text - {review.text}</p>
-          <Rate key={review.id} rating={review.rating} />
-        </>
+          <Rate rating={review.rating} />
+        </div>
       ))}
     </div>
   );
