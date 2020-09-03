@@ -5,12 +5,17 @@ import minus from '../icons/minus.svg';
 import Plus from '../icons/plus';
 
 function Product(props) {
-  const { count, decrement, increment } = props;
+  const {
+    count,
+    decrement,
+    increment,
+    product: { name, price },
+  } = props;
 
   return (
     <div>
-      <p>{props.product.name}</p>
-      <p>{props.product.price} $</p>
+      <p>{name}</p>
+      <p>{price} $</p>
       <button onClick={decrement}>
         <img src={minus} alt="minus" />
       </button>
