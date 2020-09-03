@@ -10,7 +10,7 @@ const Restaurant = function({restaurant}) {
         reviews
         .reduce((total, next) => total + next.rating, 0) / reviews.length);
     },
-    [restaurant.reviews]
+    [reviews]
   );
 
   return (
