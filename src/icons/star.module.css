@@ -1,0 +1,9 @@
+.painted {
+  stroke: gold;
+  fill: gold;
+}
+
+.default {
+  stroke: #5c5c5c;
+  fill: #5c5c5c;
+}
