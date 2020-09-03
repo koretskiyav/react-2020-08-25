@@ -1,7 +1,12 @@
 @import '~normalize.css/normalize.css';
+
 :root {
+  --black: #1d1d1d;
+  --white: #ffffff;
   --yellow: #f0ad4e;
+  --yellow-light: #ffd25d;
   --grey: #e5e5e5;
+  --grey-dark: #898989;
 }
 
 body {
@@ -16,8 +21,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-button {
-  outline: none;
 }
