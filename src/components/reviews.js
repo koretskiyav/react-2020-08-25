@@ -1,16 +1,16 @@
 import React from 'react';
 import Rating from './rate';
 
-export default function Review(props) {
+export default function Review({ reviews }) {
   return (
     <div>
-      {props.reviews.map((review) => (
-        <div key={review.id}>
-          <div>Name: {review.user}:</div>
+      {reviews.map(({ id, user, rating, text }) => (
+        <div key={id}>
+          <div>Name: {user}:</div>
           <div>
-            Rating: <Rating rating={review.rating} />
+            Rating: <Rating rating={rating} />
           </div>
-          <div>Text: {review.text}</div>
+          <div>Text: {text}</div>
         </div>
       ))}
     </div>

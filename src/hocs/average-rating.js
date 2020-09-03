@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import useAverageRating from '../hooks/use-average-rating';
 
-export default (WrappedComponent) => (props) => {
-  const averageRating = useAverageRating(props.restaurant.reviews);
+export default (WrappedComponent) => ({ restaurant }) => {
+  const averageRating = useMemo(() => useAverageRating(restaurant.reviews), [
+    restaurant.reviews,
+  ]);
 
-  return <WrappedComponent {...props} averageRating={averageRating} />;
+  return (
+    <WrappedComponent restaurant={restaurant} averageRating={averageRating} />
+  );
 };

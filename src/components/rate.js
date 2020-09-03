@@ -1,9 +1,7 @@
 import React from 'react';
 import rate from '../hocs/rating';
 
-function Rating(props) {
-  const { positive, uncertain, negative, rating } = props;
-
+function Rating({ positive, uncertain, negative, rating }) {
   const hearts =
     '❤️'.repeat(positive) + '💛'.repeat(uncertain) + '🤍'.repeat(negative);
 

@@ -4,9 +4,7 @@ import Review from './reviews';
 import Rating from './rate';
 import averageRating from '../hocs/average-rating';
 
-function Restaurant(props) {
-  const { restaurant, averageRating } = props;
-
+function Restaurant({ restaurant, averageRating }) {
   return (
     <div>
       <div>
