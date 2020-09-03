@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Menu from './menu';
 import Reviews from './reviews';
 import Rate from './rate';
@@ -16,11 +16,15 @@ const Restaurant = (props) => {
     );
   };
 
+  const memoizedCalcAverageRating = useMemo(() => calcAverageRating(reviews), [
+    reviews,
+  ]);
+
   return (
     <div>
       <Menu menu={menu} />
       <hr />
-      <Rate rating={calcAverageRating(reviews)} />
+      <Rate rating={memoizedCalcAverageRating} />
       <Reviews reviews={reviews} />
     </div>
   );
