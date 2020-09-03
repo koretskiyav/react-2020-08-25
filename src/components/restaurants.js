@@ -16,7 +16,7 @@ export default function Restaurants(props) {
         onRestaurantClick={setActiveId}
         restaurants={props.restaurants}
       />
-      <Menu menu={activeRestaurant.menu} />
+      <Menu menu={activeRestaurant.menu} activeRest={activeRestaurant} />
     </div>
   );
 }
