@@ -9,7 +9,7 @@ const useRating = (restaurant) => {
     return Math.floor(
       reviews.reduce((a, b) => a.rating + b.rating) / reviews.length
     );
-  }, [restaurant.id]);
+  }, [restaurant.reviews]);
 
   return average;
 };
