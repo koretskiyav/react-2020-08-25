@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Menu from './menu';
 import Reviews from './reviews';
 import Rate from './rate';
+import AverageRating from '../hocs/average-rating';
 
 function Restaurant(props) {
-  let reviewRate = props.restaurant.reviews.map((rate) => rate.rating);
-  let averageRating =
-    reviewRate.reduce(
-      (accumulator, currentValue) => accumulator + currentValue
-    ) / reviewRate.length;
+  let averageRating = useMemo(() => {
+    return AverageRating(props.restaurant.reviews);
+  }, [props.restaurant.reviews]);
 
   return (
     <div>
