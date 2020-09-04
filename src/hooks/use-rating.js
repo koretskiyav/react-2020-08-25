@@ -7,7 +7,7 @@ const useRating = (restaurant) => {
       return 0;
     }
     return Math.floor(
-      reviews.reduce((a, b) => a.rating + b.rating) / reviews.length
+      reviews.reduce((sum, a) => sum + a.rating, 0) / reviews.length
     );
   }, [restaurant.reviews]);
 
