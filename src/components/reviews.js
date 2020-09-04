@@ -4,7 +4,7 @@ import Rate from './rate';
 export default function Reviews(props) {
   return (
     <ul style={{ margin: 0, listStyle: 'none' }}>
-      {props.restaurant.reviews.map((review) => (
+      {props.reviews.map((review) => (
         <li
           key={review.id}
           style={{ display: 'flex', margin: 0, listStyle: 'none' }}
