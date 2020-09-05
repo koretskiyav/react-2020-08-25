@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './navigation.module.css';
+import RestaurantType from '../restaurant/restaurant.type';
 
 const Navigation = ({ restaurants, onRestaurantClick }) => (
   <div className={styles.list}>
@@ -14,5 +16,10 @@ const Navigation = ({ restaurants, onRestaurantClick }) => (
     ))}
   </div>
 );
+
+Navigation.propTypes = {
+  restaurants: PropTypes.arrayOf(PropTypes.shape(RestaurantType)),
+  onRestaurantClick: PropTypes.func,
+};
 
 export default Navigation;

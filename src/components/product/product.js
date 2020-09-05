@@ -5,6 +5,7 @@ import MinusIcon from './icons/minus.svg';
 import PlusIcon from './icons/plus.svg';
 
 import counter from '../../hocs/counter';
+import ProductType from './product.type';
 
 const Product = ({ product, amount, increment, decrement, fetchData }) => {
   useEffect(() => {
@@ -45,11 +46,7 @@ const Product = ({ product, amount, increment, decrement, fetchData }) => {
 };
 
 Product.propTypes = {
-  product: PropTypes.shape({
-    name: PropTypes.string,
-    price: PropTypes.number,
-    ingredients: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  }).isRequired,
+  product: PropTypes.shape(ProductType).isRequired,
   // from HOC counter
   amount: PropTypes.number,
   increment: PropTypes.func,

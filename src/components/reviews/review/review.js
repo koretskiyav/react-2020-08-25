@@ -2,6 +2,7 @@ import React from 'react';
 
 import Rate from '../../rate';
 import styles from './review.module.css';
+import ReviewType from './review.type';
 
 const Review = ({ user, text, rating }) => (
   <div className={styles.review}>
@@ -20,5 +21,7 @@ const Review = ({ user, text, rating }) => (
 Review.defaultProps = {
   user: 'Anonymous',
 };
+
+Review.propTypes = ReviewType;
 
 export default Review;
