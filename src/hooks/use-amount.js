@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
-export default function useAmount(initialCount = 0) {
-  const [count, setCount] = useState(initialCount);
-  const decrement = () => setCount(count > 0 ? count - 1 : 0);
-  const increment = () => setCount(count + 1);
+export default function useAmount(initialAmount = 0) {
+  const [amount, setAmount] = useState(initialAmount);
 
-  return { count, decrement, increment };
+  const decrement = () => setAmount(amount > 0 ? amount - 1 : 0);
+  const increment = () => setAmount(amount + 1);
+
+  return { amount, decrement, increment };
 }
