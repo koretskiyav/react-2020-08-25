@@ -22,6 +22,38 @@ describe('Product', () => {
     wrapper.find('[data-id="product-increment"]').simulate('click');
     expect(wrapper.find('[data-id="product-amount"]').text()).toBe('1');
   });
+  it('should decrement from 0 amount', () => {
+    const wrapper = mount(<Product product={product} />);
+    wrapper.find('[data-id="product-decrement"]').simulate('click');
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('0');
+  });
+  it('should decrement from 0 amount, alot of clicks', () => {
+    const wrapper = mount(<Product product={product} />);
+
+    for (let i = 0; i < 100; i++) {
+      wrapper.find('[data-id="product-decrement"]').simulate('click');
+    }
+
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('0');
+  });
+  it('should decrement from >0 amount', () => {
+    product.amount = 5;
+    console.log(product);
+    const wrapper = mount(<Product product={product} />);
+    wrapper.find('[data-id="product-decrement"]').simulate('click');
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('4');
+  });
+  it('should decrement from >0 amount, alot of clicks', () => {
+    product.amount = 5;
+
+    const wrapper = mount(<Product product={product} />);
+
+    for (let i = 0; i < 100; i++) {
+      wrapper.find('[data-id="product-decrement"]').simulate('click');
+    }
+
+    expect(wrapper.find('[data-id="product-amount"]').text()).toBe('0');
+  });
   it('should increment amount', () => {
     const fn = jest.fn();
     mount(<Product product={product} fetchData={fn} />);
