@@ -10,4 +10,9 @@ const Rate = ({ value }) => (
   </div>
 );
 
+Restaurants.propTypes = {
+  value: PropTypes.number.isRequired,
+};
+
+
 export default Rate;

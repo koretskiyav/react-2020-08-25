@@ -15,4 +15,12 @@ const Navigation = ({ restaurants, onRestaurantClick }) => (
   </div>
 );
 
+Navigation.propTypes = {
+
+  restaurants: PropTypes.array.isRequired,
+  onRestaurantClick: PropTypes.func.isRequired,
+
+};
+
+
 export default Navigation;
