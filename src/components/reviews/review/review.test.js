@@ -33,10 +33,6 @@ describe('Review', () => {
   });
   it('should render rate component', ()=>{
     const wrapper = mount(<Review {...review} />);
-    expect(wrapper.find('[data-id="rate"]').length).toBe(1);
-  });
-  it('should render rate component', ()=>{
-    const wrapper = mount(<Review {...review} />);
     expect(wrapper.containsMatchingElement(<Rate />)).toEqual(true);
   });
 });
