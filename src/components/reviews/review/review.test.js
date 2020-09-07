@@ -35,4 +35,9 @@ describe('Review', () => {
     const wrapper = mount(<Review {...review} />);
     expect(wrapper.containsMatchingElement(<Rate />)).toEqual(true);
   });
+  it('should send corect props to Rate component', ()=>{
+    const wrapper = mount(<Review {...review} />);
+    const rate = wrapper.find(Rate);
+    expect(rate.props().value).toEqual(review.rating);
+  });
 });
