@@ -16,4 +16,9 @@ const Star = ({ checked }) => (
   </svg>
 );
 
+
+Restaurants.propTypes = {
+  checked: PropTypes.string,
+};
+
 export default Star;

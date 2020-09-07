@@ -26,4 +26,11 @@ const Restaurant = ({ restaurant }) => {
   );
 };
 
+
+Restaurant.propTypes = {
+  name: PropTypes.string,
+  menu: PropTypes.array,
+  reviews: PropTypes.array.isRequired,
+};
+
 export default Restaurant;

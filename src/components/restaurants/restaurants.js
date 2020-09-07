@@ -21,4 +21,9 @@ const Restaurants = ({ restaurants }) => {
   );
 };
 
+Restaurants.propTypes = {
+  restaurants: PropTypes.array.isRequired,
+};
+
+
 export default Restaurants;
