@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const Reviews = ({ reviews }) => {
   return (
-    <div className={styles.reviews}>
+    <div data-id="reviews" className={styles.reviews}>
       {reviews.map((review) => (
         <Review key={review.id} {...review} />
       ))}
