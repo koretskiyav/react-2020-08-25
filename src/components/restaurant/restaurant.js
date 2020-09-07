@@ -4,6 +4,8 @@ import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
 import styles from './restaurant.module.css';
+import PropTypes, { string } from 'prop-types';
+import Review from '../reviews/review';
 
 const Restaurant = ({ restaurant }) => {
   const { name, menu, reviews } = restaurant;
@@ -24,6 +26,18 @@ const Restaurant = ({ restaurant }) => {
       </div>
     </div>
   );
+};
+
+Restaurant.propTypes = {
+  restaurant: PropTypes.shape({
+    name: string.isRequired,
+    menu: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      })
+    ),
+    reviews: PropTypes.arrayOf(Review),
+  }),
 };
 
 export default Restaurant;
