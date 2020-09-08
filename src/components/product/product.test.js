@@ -3,7 +3,7 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Product from './product';
 import { restaurants } from '../../fixtures';
-import { decrr } from './product';
+
 const product = restaurants[0].menu[0];
 
 Enzyme.configure({ adapter: new Adapter() });
