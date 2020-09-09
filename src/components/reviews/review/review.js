@@ -18,7 +18,7 @@ const Review = ({ user, text, rating }) => (
   </div>
 );
 
-Review.defaultProps = {
+Review.propTypes = {
   user: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
