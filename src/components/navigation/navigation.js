@@ -22,7 +22,7 @@ Navigation.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
     }).isRequired
-  ),
+  ).isRequired,
   onRestaurantClick: PropTypes.func,
 };
 

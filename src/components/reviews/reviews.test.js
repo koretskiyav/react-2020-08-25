@@ -13,10 +13,4 @@ describe('Reviews', () => {
     const wrapper = mount(<Reviews reviews={reviews} />);
     expect(wrapper.find('[data-reviews="reviews"]').length).toBe(1);
   });
-  it('should class reviews', () => {
-    const wrapper = mount(<Reviews reviews={reviews} />);
-    expect(wrapper.find('[data-reviews="reviews"]').hasClass('reviews')).toBe(
-      true
-    );
-  });
 });
