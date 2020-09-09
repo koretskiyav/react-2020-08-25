@@ -1,72 +1,46 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { decrement, increment, remove } from '../../redux/actions';
-import styles from '../product/product.module.css';
-import MinusIcon from '../product/icons/minus.svg';
-import PlusIcon from '../product/icons/plus.svg';
+import getProductById from '../../utils/get-product-by-id';
+import totalPrice from '../../utils/total-price';
+import { increment, decrement, remove } from '../../redux/actions';
 
-const Order = ({
-  menu,
-  product,
-  increment,
-  decrement,
-  remove,
-  amount,
-  fetchData,
-}) => {
+const Order = ({ order, product, fetchData, decrement, increment, remove }) => {
   useEffect(() => {
     fetchData && fetchData(product.id);
     // eslint-disable-next-line
   }, []);
 
-  const totalPrice = useMemo(() => {
-    console.log('menu:', menu);
-
-    const totalPrice = menu.reduce((acc, { price }) => acc + price, 0);
-    return totalPrice;
-  }, [menu]);
-
   return (
     <div>
-      <h4>Basket:</h4>
-      <p>{product.name}</p>
-      <h5>Total: </h5>
-      <div>
-        <div className={styles.counter}>
-          <div className={styles.count}>{amount}</div>
-          <div className={styles.buttons}>
-            <button
-              className={styles.button}
-              onClick={() => decrement(product.id)}
-            >
-              <img src={MinusIcon} alt="minus" />
-            </button>
-            <button
-              className={styles.button}
-              onClick={() => increment(product.id)}
-            >
-              <img src={PlusIcon} alt="plus" />
-            </button>
-            <button
-              className={styles.button}
-              onClick={() => remove(product.id)}
-            ></button>
-          </div>
-        </div>
-      </div>
+      <hr />
+      <h3>Basket:</h3>
+
+      {Object.entries(order).map(([id, count]) => {
+        const product = getProductById(id);
+
+        return (
+          <p key={id}>
+            {product.name}: {count}, price: {count * product.price} $
+            <button onClick={() => increment(product.id)}>+</button>
+            <button onClick={() => decrement(product.id)}>-</button>
+            <button onClick={() => remove(product.id)}>x</button>
+          </p>
+        );
+      })}
+
+      <h4>Total price: ${totalPrice(Object.entries(order))}</h4>
     </div>
   );
 };
 
-// const mapStateToProps = (state, ownProps) => ({
-//   // amount: state.order[ownProps.product.id] || 0,
-//   amount: 10,
-// });
-//
-// const mapDispatchToProps = {
-//   increment,
-//   decrement,
-//   remove,
-// };
+const mapStateToProps = (state) => ({
+  order: state.order,
+});
 
-export default connect()(Order);
+const mapDispatchToProps = {
+  increment,
+  decrement,
+  remove,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Order);
