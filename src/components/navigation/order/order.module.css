@@ -23,3 +23,23 @@
   height: 630px;
   background-color: #fff;
 }
+
+.restaurant {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.restaurant-name {
+}
+
+.restaurant-product {
+}
+
+.restaurant-price {
+}
+
+.restaurant-count {
+}
+
+.restaurant-common-count {
+}
