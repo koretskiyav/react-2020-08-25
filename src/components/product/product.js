@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styles from './product.module.css';
 import MinusIcon from './icons/minus.svg';
 import PlusIcon from './icons/plus.svg';
+import { increment, decrement } from '../../redux/actions';
 
-import counter from '../../hocs/counter';
+// import counter from '../../hocs/counter';
 
 const Product = ({ product, amount, increment, decrement, fetchData }) => {
   useEffect(() => {
@@ -26,12 +28,16 @@ const Product = ({ product, amount, increment, decrement, fetchData }) => {
               {amount}
             </div>
             <div className={styles.buttons}>
-              <button className={styles.button} onClick={decrement}>
+              <button
+                className={styles.button}
+                onClick={() => decrement(product.id)}
+                data-id="product-decrement"
+              >
                 <img src={MinusIcon} alt="minus" />
               </button>
               <button
                 className={styles.button}
-                onClick={increment}
+                onClick={() => increment(product.id)}
                 data-id="product-increment"
               >
                 <img src={PlusIcon} alt="plus" />
@@ -54,6 +60,21 @@ Product.propTypes = {
   amount: PropTypes.number,
   increment: PropTypes.func,
   decrement: PropTypes.func,
+  fetchData: PropTypes.func,
 };
 
-export default counter(Product);
+const mapStateToProps = (state, ownProps) => ({
+  amount: state.order[ownProps.product.id] || 0,
+});
+
+const mapDispatchToProps = {
+  increment,
+  decrement,
+};
+
+// const mapDispatchToProps = (dispatch) => ({
+//   increment: () => dispatch(increment()),
+//   decrement: () => dispatch(decrement()),
+// });
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
