@@ -1,0 +1,16 @@
+.orderWrap {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  width: 400px;
+  max-height: 300px;
+  overflow: scroll;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  z-index: 999999;
+}
+
+.orderList {
+  list-style-type: none;
+}
