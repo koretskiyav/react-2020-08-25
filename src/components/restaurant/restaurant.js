@@ -7,7 +7,7 @@ import Rate from '../rate';
 import styles from './restaurant.module.css';
 import { connect } from 'react-redux';
 
-const Restaurant = ({ activeRestaurant: restaurant }) => {
+const Restaurant = ({ restaurant }) => {
   const { name, menu, reviews } = restaurant;
 
   const averageRating = useMemo(() => {
@@ -41,7 +41,7 @@ Restaurant.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeRestaurant: state.restaurants.activeRestaurant,
+  restaurant: state.restaurants.activeRestaurant,
 });
 
 export default connect(mapStateToProps)(Restaurant);

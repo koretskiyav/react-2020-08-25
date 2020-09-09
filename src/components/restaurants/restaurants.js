@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Navigation from '../navigation';
+import { connect } from 'react-redux';
 
-const Restaurants = () => {
+const Restaurants = ({ setActiveRestaurant }) => {
   return (
     <div>
       <Navigation />
@@ -20,4 +21,8 @@ Restaurants.propTypes = {
   ).isRequired,
 };
 
-export default Restaurants;
+const mapStateToProps = (state) => ({
+  restaurants: state.restaurants.restaurants,
+});
+
+export default connect(mapStateToProps)(Restaurants);

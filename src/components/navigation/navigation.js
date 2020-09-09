@@ -5,13 +5,13 @@ import Order from './order';
 import { connect } from 'react-redux';
 import { setActiveRestaurant } from '../../redux/actions';
 
-const Navigation = ({ restaurants, setActiveRestaurant }) => (
+const Navigation = ({ restaurants, onRestaurantClick }) => (
   <div className={styles.list}>
     {restaurants.map(({ id, name }) => (
       <span
         key={id}
         className={styles.restaurant}
-        onClick={() => setActiveRestaurant(id)}
+        onClick={() => onRestaurantClick(id)}
       >
         {name}
       </span>
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  setActiveRestaurant,
+  onRestaurantClick: setActiveRestaurant,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

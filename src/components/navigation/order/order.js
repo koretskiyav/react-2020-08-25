@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 /* import PropTypes from 'prop-types'; */
 import styles from './order.module.css';
+import { connect } from 'react-redux';
 
-const Order = () => {
+const Order = ({ order }) => {
+  console.log(order);
+
   const [isVisiblePanel, setToggleVisiblePanel] = useState(false);
   const hide = (e) => {
     if (!e.target.closest(`.${styles['order-center-box']}`)) {
@@ -36,4 +39,8 @@ const Order = () => {
   onRestaurantClick: PropTypes.func.isRequired,
 }; */
 
-export default Order;
+const mapStateToProps = (state) => ({
+  order: state.order,
+});
+
+export default connect(mapStateToProps)(Order);
