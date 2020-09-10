@@ -1,25 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styles from './product.module.css';
-import MinusIcon from './icons/minus.svg';
-import PlusIcon from './icons/plus.svg';
-import { increment, decrement } from '../../redux/actions';
+import styles from '../../product/product.module.css';
+import MinusIcon from '../../product/icons/minus.svg';
+import PlusIcon from '../../product/icons/plus.svg';
+import { increment, decrement, deleteId } from '../../../redux/actions';
 
 // import counter from '../../hocs/counter';
 
-const Product = ({ product, amount, increment, decrement, fetchData }) => {
-  useEffect(() => {
-    fetchData && fetchData(product.id);
-    // eslint-disable-next-line
-  }, []);
+const BasketProduct = ({ product, amount, increment, decrement, deleteId }) => {
+  const price = amount * product.price;
   return (
     <div className={styles.product} data-id="product">
       <div className={styles.content}>
         <div>
           <h4 className={styles.title}>{product.name}</h4>
           <p className={styles.description}>{product.ingredients.join(', ')}</p>
-          <div className={styles.price}>{product.price} $</div>
+          <div className={styles.price}>{price} $</div>
         </div>
         <div>
           <div className={styles.counter}>
@@ -33,6 +30,13 @@ const Product = ({ product, amount, increment, decrement, fetchData }) => {
                 data-id="product-decrement"
               >
                 <img src={MinusIcon} alt="minus" />
+              </button>
+              <button
+                className={styles.buttonDelete}
+                onClick={() => deleteId(product.id)}
+                data-id="product-delete"
+              >
+                delete
               </button>
               <button
                 className={styles.button}
@@ -49,7 +53,7 @@ const Product = ({ product, amount, increment, decrement, fetchData }) => {
   );
 };
 
-Product.propTypes = {
+BasketProduct.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string,
     price: PropTypes.number,
@@ -69,6 +73,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = {
   increment,
   decrement,
+  deleteId,
 };
 
 // const mapDispatchToProps = (dispatch) => ({
@@ -76,4 +81,4 @@ const mapDispatchToProps = {
 //   decrement: () => dispatch(decrement()),
 // });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(BasketProduct);
