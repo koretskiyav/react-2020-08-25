@@ -1,3 +1,16 @@
 .restaurant {
   padding: 12px;
 }
+.orders {
+  position: fixed;
+  top: 115px;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 300px;
+  height: auto;
+  background: #fff;
+  padding: 20px;
+  z-index: 10;
+}
