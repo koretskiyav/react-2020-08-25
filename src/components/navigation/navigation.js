@@ -2,17 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './navigation.module.css';
 
-const Navigation = ({ restaurants, onRestaurantClick }) => (
+const Navigation = ({ restaurants, setActivePage, activePage }) => (
   <div className={styles.list}>
     {restaurants.map(({ id, name }) => (
       <span
         key={id}
         className={styles.restaurant}
-        onClick={() => onRestaurantClick(id)}
+        onClick={() => setActivePage({ restaurant: id })}
       >
         {name}
       </span>
     ))}
+    <span
+      className={styles.restaurant}
+      onClick={() =>
+        setActivePage({ restaurant: activePage.restaurant, basket: true })
+      }
+    >
+      Basket
+    </span>
   </div>
 );
 
@@ -23,7 +31,7 @@ Navigation.propTypes = {
       name: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
-  onRestaurantClick: PropTypes.func.isRequired,
+  setActivePage: PropTypes.func.isRequired,
 };
 
 export default Navigation;
