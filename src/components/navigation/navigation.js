@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './navigation.module.css';
+import Order from './order';
+import { connect } from 'react-redux';
+import { setActiveRestaurant } from '../../redux/actions';
 
 const Navigation = ({ restaurants, onRestaurantClick }) => (
   <div className={styles.list}>
@@ -13,6 +16,7 @@ const Navigation = ({ restaurants, onRestaurantClick }) => (
         {name}
       </span>
     ))}
+    <Order />
   </div>
 );
 
@@ -26,4 +30,12 @@ Navigation.propTypes = {
   onRestaurantClick: PropTypes.func.isRequired,
 };
 
-export default Navigation;
+const mapStateToProps = (state) => ({
+  restaurants: state.restaurants.restaurants,
+});
+
+const mapDispatchToProps = {
+  onRestaurantClick: setActiveRestaurant,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

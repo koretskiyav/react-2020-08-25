@@ -1,0 +1,20 @@
+.product {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.restauran-product {
+  padding: 5px;
+}
+
+.restauran-price {
+  padding: 5px;
+}
+
+.restauran-count {
+  padding: 5px;
+}
+
+.restauran-common-count {
+  padding: 5px;
+}
