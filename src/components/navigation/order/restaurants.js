@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './restaurants.module.css';
 import Product from './product';
 import Total from './total';
+import PropTypes from 'prop-types';
 
 const Restaurants = ({ restauran }) => {
   const { name, products } = restauran;
@@ -24,6 +25,19 @@ const Restaurants = ({ restauran }) => {
       />
     </div>
   );
+};
+
+Restaurants.propTypes = {
+  restauran: PropTypes.shape({
+    name: PropTypes.string,
+    products: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        count: PropTypes.number.isRequired,
+      }).isRequired
+    ).isRequired,
+  }).isRequired,
 };
 
 export default Restaurants;
