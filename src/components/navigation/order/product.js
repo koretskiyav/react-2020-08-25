@@ -2,9 +2,11 @@ import React from 'react';
 /* import PropTypes from 'prop-types'; */
 import styles from './product.module.css';
 /* import { connect } from 'react-redux'; */
+import { increment, decrement, remove } from '../../../redux/actions';
+import { connect } from 'react-redux';
 
-const Product = ({ product }) => {
-  const { name, price, count } = product;
+const Product = ({ product, increment, decrement, remove }) => {
+  const { id, name, price, count } = product;
   return (
     <div className={styles.product}>
       <div></div>
@@ -12,6 +14,9 @@ const Product = ({ product }) => {
       <div className={styles['restauran-price']}>{price}</div>
       <div className={styles['restauran-count']}>{count}</div>
       <div className={styles['restauran-common-count']}>{price + count}</div>
+      <div onClick={() => increment(id)}>+</div>
+      <div onClick={() => decrement(id)}>-</div>
+      <div onClick={() => remove(id)}>х</div>
     </div>
   );
 };
@@ -31,4 +36,10 @@ const Product = ({ product }) => {
   restaurants: state.restaurants.restaurants,
 }); */
 
-export default Product; //connect(mapStateToProps)();
+const mapDispatchToProps = {
+  increment,
+  decrement,
+  remove,
+};
+
+export default connect(null, mapDispatchToProps)(Product);

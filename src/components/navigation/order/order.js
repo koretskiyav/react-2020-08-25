@@ -44,6 +44,9 @@ const Order = ({ order, isStateToogle, toggle, setFalse, restaurants }) => {
               <div>Цена</div>
               <div>Всего единиц</div>
               <div>Общая стоимость</div>
+              <div></div>
+              <div></div>
+              <div></div>
             </div>
 
             {restaurantsProduct.map((restauran) => (

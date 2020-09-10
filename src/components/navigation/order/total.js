@@ -11,6 +11,9 @@ const Total = ({ nameTotal, price, count, common }) => {
       <div>{price}</div>
       <div>{count}</div>
       <div>{common}</div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
   );
 };

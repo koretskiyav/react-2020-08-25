@@ -19,12 +19,12 @@
 }
 
 .order-center-box {
-  width: 500px;
+  width: 700px;
   height: 630px;
   background-color: #fff;
 }
 
 .order-title {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(8, 1fr);
 }
