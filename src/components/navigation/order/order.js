@@ -3,6 +3,8 @@ import React from 'react';
 import styles from './order.module.css';
 import { connect } from 'react-redux';
 import toggle from '../../../hocs/toggle';
+import Restaurants from './restaurants';
+import Total from './total';
 
 const Order = ({ order, isStateToogle, toggle, setFalse, restaurants }) => {
   const restaurantsProduct = restaurants
@@ -21,8 +23,6 @@ const Order = ({ order, isStateToogle, toggle, setFalse, restaurants }) => {
       };
     });
 
-  console.log(restaurantsProduct);
-
   const hide = (e) => {
     if (!e.target.closest(`.${styles['order-center-box']}`)) {
       setFalse();
@@ -31,49 +31,47 @@ const Order = ({ order, isStateToogle, toggle, setFalse, restaurants }) => {
 
   return (
     <>
-      <div className={styles['order-buttom']} onClick={toggle}>
+      <div className={styles['order-button']} onClick={toggle}>
         ORDER
       </div>
+
       {isStateToogle ? (
         <div className={styles['order-panel']} onClick={hide}>
           <div className={styles['order-center-box']}>
-            {restaurantsProduct.map(({ id, name, products }) => (
-              <div className={styles.restaurant} key={id}>
-                <div
-                  className={styles['restaurant-name']}
-                  style={{
-                    gridRow: `1 / ${products.length + 2}`,
-                  }}
-                >
-                  {name}
-                </div>
+            <div className={styles['order-title']}>
+              <div>Наименование ресторана</div>
+              <div>Продукт</div>
+              <div>Цена</div>
+              <div>Всего единиц</div>
+              <div>Общая стоимость</div>
+            </div>
 
-                {products.map(({ id, name, price, count }) => (
-                  <React.Fragment key={id}>
-                    <div className={styles['restaurant-product']}>{name}</div>
-                    <div className={styles['restaurant-price']}>{price}</div>
-                    <div className={styles['restaurant-count']}>{count}</div>
-                    <div className={styles['restaurant-common-count']}>
-                      {price + count}
-                    </div>
-                  </React.Fragment>
-                ))}
+            {restaurantsProduct.map((restauran) => (
+              <Restaurants key={restauran.id} restauran={restauran} />
+            ))}
 
-                <div className={styles['restaurant-product']}></div>
-                <div className={styles['restaurant-price']}>
-                  {products.reduce((res, { price }) => res + price, 0)}
-                </div>
-                <div className={styles['restaurant-count']}>
-                  {products.reduce((res, { count }) => res + count, 0)}
-                </div>
-                <div className={styles['restaurant-common-count']}>
-                  {products.reduce(
+            <Total
+              nameTotal="Итог по всем ресторанам"
+              price={restaurantsProduct.reduce(
+                (resAll, { products }) =>
+                  resAll + products.reduce((res, { price }) => res + price, 0),
+                0
+              )}
+              count={restaurantsProduct.reduce(
+                (resAll, { products }) =>
+                  resAll + products.reduce((res, { count }) => res + count, 0),
+                0
+              )}
+              common={restaurantsProduct.reduce(
+                (resAll, { products }) =>
+                  resAll +
+                  products.reduce(
                     (res, { count, price }) => res + count + price,
                     0
-                  )}
-                </div>
-              </div>
-            ))}
+                  ),
+                0
+              )}
+            />
           </div>
         </div>
       ) : null}

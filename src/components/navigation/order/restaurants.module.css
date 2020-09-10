@@ -1,0 +1,11 @@
+.restauran {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.restauran-name {
+  padding: 5px;
+  text-align: left;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
