@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './product.module.css';
 import { increment, decrement, remove } from '../../../redux/actions';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const Product = ({ product, increment, decrement, remove }) => {
   const { id, name, price, count } = product;
@@ -17,6 +18,21 @@ const Product = ({ product, increment, decrement, remove }) => {
       <div onClick={() => remove(id)}>х</div>
     </div>
   );
+};
+
+const reduxPropTypes = {
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+};
+
+Product.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    count: PropTypes.number.isRequired,
+  }).isRequired,
+  ...reduxPropTypes,
 };
 
 const mapDispatchToProps = {
