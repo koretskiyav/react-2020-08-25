@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './order.module.css';
 import { connect } from 'react-redux';
 import toggle from '../../../hocs/toggle';
 import Restaurants from './restaurants';
 import Total from './total';
 
-const Order = ({ order, isStateToogle, toggle, setFalse, restaurants }) => {
+const Order = ({ restaurants, order, isStateToogle, toggle, setFalse }) => {
   const restaurantsProduct = restaurants
     .filter(({ menu }) =>
       menu.map(({ id }) => id).some((id) => Object.keys(order).includes(id))
@@ -79,6 +80,26 @@ const Order = ({ order, isStateToogle, toggle, setFalse, restaurants }) => {
       ) : null}
     </>
   );
+};
+
+const toggleHocPropTypes = {
+  isStateToogle: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired,
+  setFalse: PropTypes.func.isRequired,
+};
+
+const reduxPropTypes = {
+  order: PropTypes.objectOf(PropTypes.number).isRequired,
+  restaurants: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+};
+
+Order.propTypes = {
+  ...toggleHocPropTypes,
+  ...reduxPropTypes,
 };
 
 const mapStateToProps = (state) => ({
