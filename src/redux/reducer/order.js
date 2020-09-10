@@ -7,7 +7,10 @@ export default (state = {}, action) => {
     case INCREMENT:
       return { ...state, [payload.id]: (state[payload.id] || 0) + 1 };
     case DECREMENT:
-      return { ...state, [payload.id]: (state[payload.id] || 0) - 1 };
+      return {
+        ...state,
+        [payload.id]: Math.max(0, (state[payload.id] || 0) - 1),
+      };
     default:
       return state;
   }
