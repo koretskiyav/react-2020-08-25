@@ -1,5 +1,4 @@
 import React from 'react';
-/* import PropTypes from 'prop-types'; */
 import styles from './order.module.css';
 import { connect } from 'react-redux';
 import toggle from '../../../hocs/toggle';
@@ -81,16 +80,6 @@ const Order = ({ order, isStateToogle, toggle, setFalse, restaurants }) => {
     </>
   );
 };
-
-/* Navigation.propTypes = {
-  restaurants: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-  onRestaurantClick: PropTypes.func.isRequired,
-}; */
 
 const mapStateToProps = (state) => ({
   order: state.order,

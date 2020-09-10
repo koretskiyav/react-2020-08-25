@@ -1,7 +1,5 @@
 import React from 'react';
-/* import PropTypes from 'prop-types'; */
 import styles from './product.module.css';
-/* import { connect } from 'react-redux'; */
 import { increment, decrement, remove } from '../../../redux/actions';
 import { connect } from 'react-redux';
 
@@ -20,21 +18,6 @@ const Product = ({ product, increment, decrement, remove }) => {
     </div>
   );
 };
-
-/* Navigation.propTypes = {
-  restaurants: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-  onRestaurantClick: PropTypes.func.isRequired,
-}; */
-
-/* const mapStateToProps = (state) => ({
-  order: state.order,
-  restaurants: state.restaurants.restaurants,
-}); */
 
 const mapDispatchToProps = {
   increment,

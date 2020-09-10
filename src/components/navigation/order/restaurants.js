@@ -1,9 +1,7 @@
 import React from 'react';
-/* import PropTypes from 'prop-types'; */
 import styles from './restaurants.module.css';
 import Product from './product';
 import Total from './total';
-/* import { connect } from 'react-redux'; */
 
 const Restaurants = ({ restauran }) => {
   const { name, products } = restauran;
@@ -28,19 +26,4 @@ const Restaurants = ({ restauran }) => {
   );
 };
 
-/* Navigation.propTypes = {
-  restaurants: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-  onRestaurantClick: PropTypes.func.isRequired,
-}; */
-
-/* const mapStateToProps = (state) => ({
-  order: state.order,
-  restaurants: state.restaurants.restaurants,
-}); */
-
-export default Restaurants; //connect(mapStateToProps)();
+export default Restaurants;
