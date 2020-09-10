@@ -31,14 +31,25 @@ const Order = ({ restaurants, order, isStateToogle, toggle, setFalse }) => {
 
   return (
     <>
-      <div className={styles['order-button']} onClick={toggle}>
+      <div
+        className={styles['order-button']}
+        onClick={toggle}
+        data-test-id="order-button"
+      >
         ORDER
       </div>
 
       {isStateToogle ? (
-        <div className={styles['order-panel']} onClick={hide}>
-          <div className={styles['order-center-box']}>
-            <div className={styles['order-title']}>
+        <div
+          className={styles['order-panel']}
+          onClick={hide}
+          data-test-id="order-panel"
+        >
+          <div
+            className={styles['order-center-box']}
+            data-test-id="order-center-box"
+          >
+            <div className={styles['order-title']} data-test-id="order-title">
               <div>Наименование ресторана</div>
               <div>Продукт</div>
               <div>Цена</div>
