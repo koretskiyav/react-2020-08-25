@@ -6,13 +6,26 @@ import { increment, decrement, remove } from '../../redux/actions';
 
 const Order = ({ product, amount, increment, decrement, remove }) => {
   return amount > 0 ? (
-    <div className={styles.order}>
-      <button onClick={() => decrement(product.id, product.price)}>-</button>
-      <div className={styles.amount}>{amount > 0 ? amount : 0}</div>
-      <button onClick={() => increment(product.id, product.price)}>+</button>
+    <div className={styles.order} data-id="order">
+      <button
+        onClick={() => decrement(product.id, product.price)}
+        data-id="order-decrement"
+      >
+        -
+      </button>
+      <div className={styles.amount} data-id="order-amount">
+        {amount > 0 ? amount : 0}
+      </div>
+      <button
+        onClick={() => increment(product.id, product.price)}
+        data-id="order-increment"
+      >
+        +
+      </button>
       <div className={styles.totalProduct}>{product.price * amount}$</div>
-
-      <button onClick={() => remove(product.id)}>x</button>
+      <button onClick={() => remove(product.id)} data-id="order-remove">
+        x
+      </button>
     </div>
   ) : null;
 };
@@ -25,6 +38,17 @@ const mapDispatchToProps = {
   increment,
   decrement,
   remove,
+};
+
+Order.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+  amount: PropTypes.number,
+  increment: PropTypes.func,
+  decrement: PropTypes.func,
+  remove: PropTypes.func,
 };
 
 // const mapDispatchToProps = (dispatch) => ({
