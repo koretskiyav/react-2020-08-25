@@ -1,0 +1,11 @@
+.order {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.amount {
+  padding: 10px;
+}
+.totalProduct {
+  padding-left: 10px;
+}
