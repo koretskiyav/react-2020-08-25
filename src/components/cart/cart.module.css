@@ -1,0 +1,12 @@
+.cart {
+  position: fixed;
+  z-index: 2;
+  background: lightyellow;
+  padding: 20px;
+  border: 1px solid;
+}
+
+.total {
+  font-weight: bold;
+  margin-top: 12px;
+}
