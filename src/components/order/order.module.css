@@ -1,0 +1,30 @@
+.order {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 12px 60px;
+  margin-bottom: 12px;
+}
+
+.order > * {
+  padding: 12px 0;
+}
+
+@media all and (min-width: 768px) {
+  .order {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0;
+  }
+
+  .order > *:first-child {
+    flex: 1 0 calc(100% - 400px - 2 * 24px);
+  }
+
+  .order > *:last-child {
+    flex: 1 0 calc(400px - 24px);
+  }
+
+  .order > * {
+    padding: 0 12px;
+  }
+}
