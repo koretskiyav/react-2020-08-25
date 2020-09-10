@@ -4,7 +4,7 @@ import reducer from './reducer';
 
 function flattenMenu(menu) {
   return menu.reduce(
-    (obj, { id, name, price }) => ({ ...obj, [id]: { name, price } }),
+    (obj, { id, name, price }) => ({ ...obj, [id]: { name, price, id } }),
     {}
   );
 }
