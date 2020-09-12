@@ -5,6 +5,7 @@ import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
+import { connect } from 'react-redux';
 
 const Restaurant = ({ restaurant }) => {
   const { name, menu, reviews } = restaurant;
@@ -41,4 +42,13 @@ Restaurant.propTypes = {
   }).isRequired,
 };
 
-export default Restaurant;
+const mapStateToProps = (state, ownProps) => ({
+  restaurant: {
+    ...state.restaurants[ownProps.id],
+    reviews: state.restaurants[ownProps.id].reviews.map(
+      (id) => state.reviews[id]
+    ),
+  },
+});
+
+export default connect(mapStateToProps)(Restaurant);
