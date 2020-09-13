@@ -16,9 +16,9 @@ export default (reviews = defaultReviews, action) => {
     case ADD_REVIEW: {
       return {
         ...reviews,
-        [payload.review.id]: {
-          id: payload.review.id,
-          userId: payload.user.id,
+        [action.reviewId]: {
+          id: action.reviewId,
+          userId: action.userId,
           text: payload.review.text,
           rating: payload.review.rate,
         },

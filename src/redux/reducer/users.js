@@ -11,13 +11,12 @@ const defaultUsers = normalizedUsers.reduce(
 
 export default (users = defaultUsers, action) => {
   const { type, payload } = action;
-
   switch (type) {
     case ADD_REVIEW: {
       return {
         ...users,
-        [payload.user.id]: {
-          id: payload.user.id,
+        [action.userId]: {
+          id: action.userId,
           name: payload.user.name,
         },
       };

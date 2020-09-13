@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ADD_REVIEW } from '../constants';
 
-export default (store) => (next) => (action) => {
+/* export default (store) => (next) => (action) => {
   const { type } = action;
   switch (type) {
     case ADD_REVIEW: {
@@ -13,4 +12,17 @@ export default (store) => (next) => (action) => {
     default:
       next(action);
   }
-};
+}; */
+
+export default function (nameField, ...forType) {
+  return (store) => (next) => (action) => {
+    if (forType && forType.includes(action.type)) {
+      next({
+        ...action,
+        [nameField]: uuidv4(),
+      });
+    } else {
+      next(action);
+    }
+  };
+}

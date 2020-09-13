@@ -20,7 +20,7 @@ export default (restaurants = defaultRestaurants, action) => {
           ...restaurants[payload.restaurant.id],
           reviews: [
             ...restaurants[payload.restaurant.id].reviews,
-            payload.review.id,
+            action.reviewId,
           ],
         },
       };
