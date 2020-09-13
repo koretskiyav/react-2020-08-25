@@ -1,4 +1,5 @@
 import { normalizedUsers } from '../../fixtures';
+import { ADD_REVIEW } from '../constants';
 
 const defaultUsers = normalizedUsers.reduce(
   (acc, user) => ({
@@ -9,9 +10,18 @@ const defaultUsers = normalizedUsers.reduce(
 );
 
 export default (users = defaultUsers, action) => {
-  const { type } = action;
+  const { type, payload } = action;
 
   switch (type) {
+    case ADD_REVIEW: {
+      return {
+        ...users,
+        [payload.user.id]: {
+          id: payload.user.id,
+          name: payload.user.name,
+        },
+      };
+    }
     default:
       return users;
   }
