@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 import Button from '../../button';
 import { submit } from '../../../redux/actions';
 
-const INITIAL_VALUES = { name: '', text: '', rate: 5 };
+const INITIAL_VALUES = { name: '', text: '', rate: 5, restaurant: '' };
 
-const ReviewForm = ({ submit }) => {
+const ReviewForm = ({ submit, restaurant }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    submit(values);
+    submit({ ...values, restaurant });
     reset();
   };
 
