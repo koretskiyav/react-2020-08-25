@@ -7,7 +7,7 @@ import Rate from '../rate';
 import Tabs from '../tabs';
 
 const Restaurant = ({ restaurant }) => {
-  const { name, menu, reviews } = restaurant;
+  const { id, name, menu, reviews } = restaurant;
 
   const averageRating = useMemo(() => {
     const total = reviews.reduce((acc, { rating }) => acc + rating, 0);
@@ -16,7 +16,10 @@ const Restaurant = ({ restaurant }) => {
 
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} /> },
-    { title: 'Reviews', content: <Reviews reviews={reviews} /> },
+    {
+      title: 'Reviews',
+      content: <Reviews reviews={reviews} activeRestaurantId={id} />,
+    },
   ];
 
   return (
@@ -33,11 +36,7 @@ Restaurant.propTypes = {
   restaurant: PropTypes.shape({
     name: PropTypes.string,
     menu: PropTypes.array,
-    reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        rating: PropTypes.number.isRequired,
-      }).isRequired
-    ).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }).isRequired,
 };
 
