@@ -1,17 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import Product from '../product';
-
 import styles from './menu.module.css';
 import Basket from '../basket';
 
 class Menu extends React.Component {
   static propTypes = {
-    menu: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }).isRequired
-    ).isRequired,
+    menu: PropTypes.arrayOf(string),
   };
 
   state = { error: null };
@@ -41,13 +36,5 @@ class Menu extends React.Component {
     );
   }
 }
-
-// Menu.propTypes = {
-//   menu: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//     }).isRequired
-//   ).isRequired,
-// };
 
 export default Menu;

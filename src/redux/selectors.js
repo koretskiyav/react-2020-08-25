@@ -1,8 +1,16 @@
 import { createSelector } from 'reselect';
 
-// const restaurantsSelector = (state) => state.restaurants;
-const orderSelector = (state) => state.order;
-const productsSelector = (state) => state.products;
+export const orderSelector = (state) => state.order;
+export const productsSelector = (state) => state.products;
+export const reviewsSelector = (state) => state.reviews;
+export const usersSelector = (state) => state.users;
+export const userSelectorByName = (state, ownProps) =>
+  Object.values(usersSelector(state)).find(
+    (user) => user.name === ownProps.name
+  );
+export const reviewSelector = (state, ownProps) =>
+  reviewsSelector(state)[ownProps.id];
+export const idSelector = (state, ownProps) => ownProps.id;
 
 export const orderProductsSelector = createSelector(
   productsSelector,
@@ -16,6 +24,17 @@ export const orderProductsSelector = createSelector(
         amount: order[product.id],
         subtotal: order[product.id] * product.price,
       }));
+  }
+);
+
+export const averageRatingSelector = createSelector(
+  reviewsSelector,
+  (reviews) => {
+    const reviewsArr = Object.values(reviews);
+    const totalRating = reviewsArr.reduce((acc, current) => {
+      return acc + current.rating;
+    }, 0);
+    return totalRating / reviewsArr.length;
   }
 );
 

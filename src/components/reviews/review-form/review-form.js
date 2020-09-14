@@ -1,19 +1,40 @@
 import React from 'react';
 import useForm from '../../../hooks/use-form';
-
 import Rate from '../../rate';
 import styles from './review-form.module.css';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../button';
+import { CREATE_REVIEW } from '../../../redux/constants';
+import { userSelectorByName } from '../../../redux/selectors';
 
 const INITIAL_VALUES = { name: '', text: '', rate: 5 };
 
-const ReviewForm = ({ onSubmit }) => {
+const ReviewForm = ({ restaurantId }) => {
   const { values, handlers, reset } = useForm(INITIAL_VALUES);
+  const dispatch = useDispatch();
+  const user = useSelector((state) =>
+    userSelectorByName(state, { name: values.name })
+  );
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    onSubmit(values);
+
+    dispatch({
+      type: CREATE_REVIEW,
+      payload: {
+        reviewData: {
+          text: values.text,
+          rate: values.rate,
+        },
+        userData: {
+          name: values.name,
+          id: user ? user.id : null,
+        },
+        restaurantId,
+      },
+      needNewIds: user ? 1 : 2,
+    });
+
     reset();
   };
 
@@ -51,6 +72,4 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
-  onSubmit: (values) => console.log(values), // TODO
-}))(ReviewForm);
+export default ReviewForm;
