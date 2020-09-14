@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-// const restaurantsSelector = (state) => state.restaurants;
+const restaurantsSelector = (state) => state.restaurants;
 const orderSelector = (state) => state.order;
 const productsSelector = (state) => state.products;
 const reviewsSelector = (state) => state.reviews;
@@ -41,10 +41,20 @@ export const reviewByRestuarantSelector = createSelector(
 export const getRestuarantWithReviews = createSelector(
   getRestaurantById,
   reviewByRestuarantSelector,
-  (restaurants, reviews) => {
+  (restaurant, reviews) => {
     return {
-      ...restaurants,
+      ...restaurant,
       reviews,
     };
+  }
+);
+
+export const getTabsRestuarants = createSelector(
+  restaurantsSelector,
+  (restaurants) => {
+    return Object.entries(restaurants).map(([id, restaurant]) => ({
+      id,
+      title: restaurant.name,
+    }));
   }
 );
