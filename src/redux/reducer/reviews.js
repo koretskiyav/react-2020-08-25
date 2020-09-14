@@ -13,7 +13,12 @@ export default (reviews = defaultReviews, action) => {
     case SUBMIT:
       return {
         ...reviews,
-        [payload.id]: { ...payload },
+        [payload.id]: {
+          id: payload.id,
+          userId: payload.userId,
+          text: payload.text,
+          rating: payload.rate,
+        },
       };
       break;
     default:
