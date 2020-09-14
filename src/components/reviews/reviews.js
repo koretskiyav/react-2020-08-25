@@ -8,7 +8,7 @@ const Reviews = ({ reviews }) => {
   return (
     <div className={styles.reviews}>
       {reviews.map((review) => (
-        <Review key={review.id} {...review} />
+        <Review key={review} review={review} />
       ))}
       <ReviewForm />
     </div>
@@ -16,11 +16,7 @@ const Reviews = ({ reviews }) => {
 };
 
 Reviews.propTypes = {
-  reviews: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default Reviews;
