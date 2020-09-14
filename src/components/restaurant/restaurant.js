@@ -6,6 +6,7 @@ import Banner from '../banner';
 import Rate from '../rate';
 import Tabs from '../tabs';
 import { connect } from 'react-redux';
+import { getRestuarantWithReviews } from '../../redux/selectors';
 
 const Restaurant = ({ restaurant }) => {
   const { id, name, menu, reviews } = restaurant;
@@ -46,12 +47,7 @@ Restaurant.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    restaurant: {
-      ...state.restaurants[ownProps.id],
-      reviews: state.restaurants[ownProps.id].reviews.map(
-        (id) => state.reviews[id]
-      ),
-    },
+    restaurant: getRestuarantWithReviews(state, ownProps.id),
   };
 };
 
