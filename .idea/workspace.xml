@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c308d9d0-07c8-4a14-9b54-b82bac832588" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/product/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/restaurant/restaurant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/restaurant/restaurant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/restaurants/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/restaurants/restaurants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reviews/review-form/review-form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reviews/review-form/review-form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reviews/review/review.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reviews/review/review.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reviews/reviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reviews/reviews.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/middlewares/logger.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/middlewares/logger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducer/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducer/restaurants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducer/reviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducer/reviews.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/selectors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/selectors.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1gy1vPyWBi4HQFT0v2vYZ2hkkRx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c308d9d0-07c8-4a14-9b54-b82bac832588" name="Default Changelist" comment="" />
+      <created>1599072247946</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599072247946</updated>
+      <workItem from="1599072249068" duration="73959000" />
+      <workItem from="1599529565268" duration="4467000" />
+      <workItem from="1600017070282" duration="32714000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="759" y="386" key="#Usage_Scope" timestamp="1600029271089">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="759" y="386" key="#Usage_Scope/0.0.1920.1040@0.0.1920.1040" timestamp="1600029271089" />
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600080907315">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600080907315" />
+    <state x="690" y="299" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper" timestamp="1600019389338">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="299" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper/0.0.1920.1040@0.0.1920.1040" timestamp="1600019389338" />
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1600029261462">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1600029261462" />
+    <state x="461" y="164" key="SettingsEditor" timestamp="1600029322355">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600029322355" />
+    <state x="0" y="0" width="1597" height="1028" key="dock-window-1" timestamp="1599074739904">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="0" y="0" width="1597" height="1028" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1599074739904" />
+    <state x="1971" y="0" width="1597" height="718" maximized="true" key="dock-window-2" timestamp="1599136030857">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1971" y="0" width="1597" height="718" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599136030857" />
+    <state x="0" y="0" width="1597" height="718" key="dock-window-3" timestamp="1599239149378">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="0" y="0" width="1597" height="718" key="dock-window-3/0.0.1920.1040@0.0.1920.1040" timestamp="1599239149378" />
+    <state x="330" y="329" width="1597" height="718" key="dock-window-4" timestamp="1600017247770">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="330" y="329" width="1597" height="718" key="dock-window-4/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599509389996" />
+    <state x="330" y="329" width="1597" height="718" key="dock-window-4/0.0.1920.1040@0.0.1920.1040" timestamp="1600017247770" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1599533337835">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1599533337835" />
+  </component>
+</project>
