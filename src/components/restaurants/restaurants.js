@@ -3,24 +3,31 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
+import { getTabsRestuarants } from '../../redux/selectors';
 
-const Restaurants = ({ restaurants }) => {
-  const tabs = restaurants.map((restaurant) => ({
-    title: restaurant.name,
-    content: <Restaurant restaurant={restaurant} />,
-  }));
-
-  return <Tabs tabs={tabs} />;
+const Restaurants = ({ tabs }) => {
+  return (
+    <Tabs
+      tabs={tabs.map((e) => ({
+        title: e.title,
+        content: <Restaurant id={e.id} />,
+      }))}
+    />
+  );
 };
 
 Restaurants.propTypes = {
-  restaurants: PropTypes.arrayOf(
+  restaurants: PropTypes.objectOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
     }).isRequired
-  ).isRequired,
+  ),
 };
 
-export default connect((state) => ({
-  restaurants: state.restaurants,
-}))(Restaurants);
+const mapStateToProps = (state) => {
+  return {
+    tabs: getTabsRestuarants(state),
+  };
+};
+
+export default connect(mapStateToProps)(Restaurants);
