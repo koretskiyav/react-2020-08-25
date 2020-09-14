@@ -4,6 +4,10 @@ import { createSelector } from 'reselect';
 const orderSelector = (state) => state.order;
 const productsSelector = (state) => state.products;
 
+export const restaurantReviewsSelector = (state, reviews) =>
+  Object.values(state.reviews).filter((review) => reviews.includes(review.id));
+export const userSelector = (state, userId) => state.users[userId].name;
+
 export const orderProductsSelector = createSelector(
   productsSelector,
   orderSelector,
