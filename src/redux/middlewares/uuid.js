@@ -7,8 +7,8 @@ export default (store) => (next) => (action) => {
   switch (type) {
     case ADD_REVIEW:
       next({
-        payload: { ...payload, userUid: uuidv4(), reviewUid: uuidv4() },
         ...action,
+        payload: { ...payload, userUid: uuidv4(), reviewUid: uuidv4() },
       });
       break;
     default:
