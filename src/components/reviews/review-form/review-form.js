@@ -52,21 +52,8 @@ const ReviewForm = ({ restaurantId, onSubmit }) => {
   );
 };
 
-export default connect(null, (dispatch) => ({
-  onSubmit: (restaurantId, { name, text, rate }) => {
-    dispatch(
-      addReview({
-        restaurant: {
-          id: restaurantId,
-        },
-        user: {
-          name,
-        },
-        review: {
-          text,
-          rate,
-        },
-      })
-    );
-  },
-}))(ReviewForm);
+const mapDispatchToProps = {
+  onSubmit: addReview,
+};
+
+export default connect(null, mapDispatchToProps)(ReviewForm);
