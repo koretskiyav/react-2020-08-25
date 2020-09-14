@@ -6,6 +6,9 @@ import styles from './review-form.module.css';
 import { connect } from 'react-redux';
 import Button from '../../button';
 
+//--
+import { onSubmit } from '../../redux/actions';
+
 const INITIAL_VALUES = { name: '', text: '', rate: 5 };
 
 const ReviewForm = ({ onSubmit }) => {
@@ -51,6 +54,19 @@ const ReviewForm = ({ onSubmit }) => {
   );
 };
 
-export default connect(null, () => ({
+//----
+const mapStateToProps = (state, ownProps) => ({
+  name: state.values[ownProps.name],
+  text: state.values[ownProps.text],
+  rate: state.values[ownProps.rate],
+});
+
+const mapDispatchToProps = {
+  onSubmit,
+};
+
+//----
+
+export default connect(mapStateToProps, mapDispatchToProps /*null */, () => ({
   onSubmit: (values) => console.log(values), // TODO
 }))(ReviewForm);
