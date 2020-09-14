@@ -34,7 +34,7 @@ Review.defaultProps = {
 };
 
 export default connect((state, { review }) => ({
-  user: state.reviews[review].user,
+  user: state.users[state.reviews[review].userId].name,
   text: state.reviews[review].text,
   rating: state.reviews[review].rating,
 }))(Review);
