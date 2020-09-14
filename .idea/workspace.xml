@@ -19,22 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c308d9d0-07c8-4a14-9b54-b82bac832588" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/product/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/restaurant/restaurant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/restaurant/restaurant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/restaurants/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/restaurants/restaurants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/reviews/review-form/review-form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reviews/review-form/review-form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/reviews/review/review.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reviews/review/review.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/reviews/reviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reviews/reviews.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/middlewares/logger.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/middlewares/logger.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducer/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducer/restaurants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducer/restaurants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducer/reviews.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducer/reviews.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/selectors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/selectors.js" afterDir="false" />
-    </list>
+    <list default="true" id="c308d9d0-07c8-4a14-9b54-b82bac832588" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,7 +73,7 @@
       <updated>1599072247946</updated>
       <workItem from="1599072249068" duration="73959000" />
       <workItem from="1599529565268" duration="4467000" />
-      <workItem from="1600017070282" duration="32714000" />
+      <workItem from="1600017070282" duration="33022000" />
     </task>
     <servers />
   </component>
