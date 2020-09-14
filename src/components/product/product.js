@@ -11,6 +11,7 @@ const Product = ({ product, amount, increment, decrement, fetchData }) => {
     fetchData && fetchData(product.id);
     // eslint-disable-next-line
   }, []);
+  
   return (
     <div className={styles.product} data-id="product">
       <div className={styles.content}>
