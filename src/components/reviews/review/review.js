@@ -26,9 +26,11 @@ const Review = ({ review, userName }) => {
 };
 
 Review.propTypes = {
-  user: PropTypes.string,
-  text: PropTypes.string,
-  rating: PropTypes.number.isRequired,
+  userName: PropTypes.string,
+  review: PropTypes.shape({
+    text: PropTypes.string,
+    rating: PropTypes.number.isRequired,
+  }),
 };
 
 Review.defaultProps = {
