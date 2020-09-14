@@ -8,8 +8,8 @@ import users from './users';
 
 export default combineReducers({
   order,
-  restaurants,
   products,
   reviews,
   users,
+  restaurants,
 });
