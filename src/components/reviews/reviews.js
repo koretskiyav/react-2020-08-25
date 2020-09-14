@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReviewForm from './review-form';
 import Review from './review';
 import styles from './reviews.module.css';
+import { restaurantReviewsSelector } from '../../redux/selectors';
 
 const Reviews = ({ reviews }) => {
   return (
@@ -23,4 +25,6 @@ Reviews.propTypes = {
   ).isRequired,
 };
 
-export default Reviews;
+export default connect((state, { reviews }) => ({
+  reviews: restaurantReviewsSelector(state, reviews),
+}))(Reviews);
