@@ -7,7 +7,7 @@ import styles from './product.module.css';
 import { increment, decrement } from '../../redux/actions';
 
 import Button from '../button';
-import { productAmountSelector, productSelector } from '../../redux/selectors';
+import { productAmountSelector } from '../../redux/selectors';
 
 const Product = ({ product, amount, increment, decrement, fetchData }) => {
   useEffect(() => {
@@ -61,7 +61,6 @@ Product.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   amount: productAmountSelector,
-  product: productSelector,
 });
 
 // const mapStateToProps = (state, props) => ({
