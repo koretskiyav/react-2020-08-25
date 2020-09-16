@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import Rate from '../../rate';
 import styles from './review.module.css';
-import { connect } from 'react-redux';
-import { reviewWitUserSelector } from '../../../redux/selectors';
 
 const Review = ({ review: { user = 'Anonymous', text, rating } }) => (
   <div className={styles.review} data-id="review">
@@ -32,6 +30,4 @@ Review.propTypes = {
   }),
 };
 
-export default connect((state, props) => ({
-  review: reviewWitUserSelector(state, props),
-}))(Review);
+export default Review;

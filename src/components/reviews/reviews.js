@@ -1,21 +1,28 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReviewForm from './review-form';
 import Review from './review';
 import styles from './reviews.module.css';
-
+import { connect } from 'react-redux';
+import {
+  reviewsWithUsersListSelector,
+  reviewsLoadingSelector,
+  reviewsLoadedSelector,
+} from '../../redux/selectors';
 import { loadReviews } from '../../redux/actions';
+import Loader from '../loader';
 
-const Reviews = ({ reviews, restaurantId, loadReviews }) => {
+const Reviews = ({ reviews, restaurantId, loadReviews, loading, loaded }) => {
   useEffect(() => {
-    loadReviews(restaurantId);
+    if (loading || !loaded) loadReviews(restaurantId);
   }, [restaurantId]); // eslint-disable-line
+
+  if (loading || !loaded) return <Loader />;
 
   return (
     <div className={styles.reviews}>
-      {reviews.map((id) => (
-        <Review key={id} id={id} />
+      {reviews.map((review) => (
+        <Review key={review.id} review={review} />
       ))}
       <ReviewForm restaurantId={restaurantId} />
     </div>
@@ -24,7 +31,20 @@ const Reviews = ({ reviews, restaurantId, loadReviews }) => {
 
 Reviews.propTypes = {
   restaurantId: PropTypes.string.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      user: PropTypes.string,
+      text: PropTypes.string,
+      rating: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
-export default connect(null, { loadReviews })(Reviews);
+export default connect(
+  (state) => ({
+    reviews: reviewsWithUsersListSelector(state),
+    loading: reviewsLoadingSelector(state),
+    loaded: reviewsLoadedSelector(state),
+  }),
+  { loadReviews }
+)(Reviews);

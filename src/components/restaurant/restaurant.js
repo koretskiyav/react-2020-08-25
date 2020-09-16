@@ -7,18 +7,19 @@ import Rate from '../rate';
 import Tabs from '../tabs';
 import { connect } from 'react-redux';
 import { averageRatingSelector } from '../../redux/selectors';
-import { loadProducts } from '../../redux/actions';
+import { loadProducts, loadReviews } from '../../redux/actions';
 
-const Restaurant = ({ id, name, reviews, averageRating, loadProducts }) => {
+const Restaurant = ({ id, name, averageRating, loadProducts, loadReviews }) => {
   useEffect(() => {
     loadProducts(id);
+    loadReviews(id);
   }, [id]); // eslint-disable-line
 
   const tabs = [
     { title: 'Menu', content: <Menu restaurantId={id} /> },
     {
       title: 'Reviews',
-      content: <Reviews reviews={reviews} restaurantId={id} />,
+      content: <Reviews restaurantId={id} />,
     },
   ];
 
@@ -36,15 +37,15 @@ Restaurant.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
   menu: PropTypes.array,
-  reviews: PropTypes.array,
   averageRating: PropTypes.number,
 };
 
 export default connect(
-  (state, props) => ({
-    averageRating: averageRatingSelector(state, props),
+  (state) => ({
+    averageRating: averageRatingSelector(state),
   }),
   {
     loadProducts,
+    loadReviews,
   }
 )(Restaurant);
