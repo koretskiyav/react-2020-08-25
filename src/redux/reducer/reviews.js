@@ -5,7 +5,7 @@ import {
   REQUEST,
   SUCCESS,
 } from '../constants';
-import { arrToMap } from '../utils';
+import { arrToMap, mergeObject } from '../utils';
 
 const initialState = {
   entities: {},
@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
     case LOAD_REVIEWS + SUCCESS:
       return {
         ...state,
-        entities: arrToMap(response),
+        entities: mergeObject(state.entities, arrToMap(response)),
         loading: false,
         loaded: true,
       };

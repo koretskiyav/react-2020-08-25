@@ -16,3 +16,9 @@ export const getById = (selector, defaultValue) =>
   );
 
 export const mapToArray = (selector) => createSelector(selector, Object.values);
+
+export const mergeObject = (left, right) =>
+  [...Object.entries(left), ...Object.entries(right)].reduce(
+    (acc, [id, item]) => ({ ...acc, [id]: item }),
+    {}
+  );

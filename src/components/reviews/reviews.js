@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewForm from './review-form';
 import Review from './review';
@@ -9,14 +9,9 @@ import {
   reviewsLoadingSelector,
   reviewsLoadedSelector,
 } from '../../redux/selectors';
-import { loadReviews } from '../../redux/actions';
 import Loader from '../loader';
 
-const Reviews = ({ reviews, restaurantId, loadReviews, loading, loaded }) => {
-  useEffect(() => {
-    if (loading || !loaded) loadReviews(restaurantId);
-  }, [restaurantId]); // eslint-disable-line
-
+const Reviews = ({ reviews, restaurantId, loading, loaded }) => {
   if (loading || !loaded) return <Loader />;
 
   return (
@@ -40,11 +35,8 @@ Reviews.propTypes = {
   ).isRequired,
 };
 
-export default connect(
-  (state) => ({
-    reviews: reviewsWithUsersListSelector(state),
-    loading: reviewsLoadingSelector(state),
-    loaded: reviewsLoadedSelector(state),
-  }),
-  { loadReviews }
-)(Reviews);
+export default connect((state) => ({
+  reviews: reviewsWithUsersListSelector(state),
+  loading: reviewsLoadingSelector(state),
+  loaded: reviewsLoadedSelector(state),
+}))(Reviews);
