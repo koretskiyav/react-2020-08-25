@@ -1,3 +1,4 @@
+import produce from 'immer';
 import { FAILURE, LOAD_PRODUCTS, REQUEST, SUCCESS } from '../constants';
 import { arrToMap, mergeObject } from '../utils';
 
@@ -10,31 +11,25 @@ const initialState = {
 };
 
 // { [productId]: product }
-export default (state = initialState, action) => {
+export default produce((draft = initialState, action) => {
   const { type, response, error, restaurantId } = action;
 
   switch (type) {
     case LOAD_PRODUCTS + REQUEST:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
+      draft.loading = true;
+      draft.error = null;
+      break;
     case LOAD_PRODUCTS + SUCCESS:
-      return {
-        ...state,
-        entities: mergeObject(state.entities, arrToMap(response)),
-        loading: false,
-        loaded: true,
-        loadedByRestaurant: [...state.loadedByRestaurant, restaurantId],
-      };
+      draft.entities = mergeObject(draft.entities, arrToMap(response));
+      draft.loading = false;
+      draft.loaded = true;
+      draft.loadedByRestaurant.push(restaurantId);
+      break;
     case LOAD_PRODUCTS + FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error,
-      };
+      draft.loading = false;
+      draft.error = error;
+      break;
     default:
-      return state;
+      return draft;
   }
-};
+});

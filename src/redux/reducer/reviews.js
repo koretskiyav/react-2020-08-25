@@ -1,3 +1,4 @@
+import produce from 'immer';
 import {
   ADD_REVIEW,
   FAILURE,
@@ -14,39 +15,28 @@ const initialState = {
   error: null,
 };
 
-export default (state = initialState, action) => {
+export default produce((draft = initialState, action) => {
   const { type, payload, reviewId, userId, response, error } = action;
 
   switch (type) {
     case LOAD_REVIEWS + REQUEST:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
+      draft.loading = true;
+      draft.error = null;
+      break;
     case LOAD_REVIEWS + SUCCESS:
-      return {
-        ...state,
-        entities: mergeObject(state.entities, arrToMap(response)),
-        loading: false,
-        loaded: true,
-      };
+      draft.entities = mergeObject(draft.entities, arrToMap(response));
+      draft.loading = false;
+      draft.loaded = true;
+      break;
     case LOAD_REVIEWS + FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error,
-      };
+      draft.loading = false;
+      draft.error = error;
+      break;
     case ADD_REVIEW:
       const { text, rating } = payload.review;
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          [reviewId]: { id: reviewId, userId, text, rating },
-        },
-      };
+      draft.entities[reviewId] = { id: reviewId, userId, text, rating };
+      break;
     default:
-      return state;
+      return draft;
   }
-};
+});
