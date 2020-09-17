@@ -9,9 +9,9 @@ import {
   restaurantsLoadingSelector,
   restaurantsLoadedSelector,
 } from '../../redux/selectors';
-import { loadRestaurants } from '../../redux/actions';
+import { loadRestaurants, dropReviews } from '../../redux/actions';
 
-const Restaurants = ({ restaurants, loadRestaurants, loading, loaded }) => {
+const Restaurants = ({ restaurants, loadRestaurants, loading, loaded, dropReviews }) => {
   useEffect(() => {
     if (!loading && !loaded) loadRestaurants();
   }, []); // eslint-disable-line
@@ -23,7 +23,7 @@ const Restaurants = ({ restaurants, loadRestaurants, loading, loaded }) => {
     content: <Restaurant {...restaurant} />,
   }));
 
-  return <Tabs tabs={tabs} />;
+  return <Tabs tabs={tabs} action={dropReviews}/>;
 };
 
 Restaurants.propTypes = {
@@ -40,5 +40,5 @@ export default connect(
     loading: restaurantsLoadingSelector(state),
     loaded: restaurantsLoadedSelector(state),
   }),
-  { loadRestaurants }
+  { loadRestaurants, dropReviews }
 )(Restaurants);
