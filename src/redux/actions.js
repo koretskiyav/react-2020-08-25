@@ -5,6 +5,7 @@ import {
   ADD_REVIEW,
   LOAD_RESTAURANTS,
   LOAD_REVIEWS,
+  LOAD_PRODUCTS,
   REQUEST,
   SUCCESS,
   FAILURE,
@@ -37,3 +38,34 @@ export const loadReviews = (restaurantId) => async (dispatch) => {
     dispatch({ type: LOAD_REVIEWS + FAILURE, error });
   }
 };
+
+export const loadProducts = (restaurantId) => async (dispatch) => {
+  dispatch({ type: LOAD_PRODUCTS + REQUEST });
+
+  try {
+    const response = await fetch(
+      `/api/products?id=${restaurantId}`
+    ).then((res) => res.json());
+    dispatch({ type: LOAD_PRODUCTS + SUCCESS, response });
+  } catch (error) {
+    dispatch({ type: LOAD_PRODUCTS + FAILURE, error });
+  }
+};
+
+// export const loadProducts = () => ({
+//   type: LOAD_PRODUCTS,
+//   CallAPI: `/api/products?id=${restaurantId}`,
+// });
+
+// export const loadUsers = () => async (dispatch) => {
+//   dispatch({ type: LOAD_USERS + REQUEST });
+
+//   try {
+//     const response = await fetch(
+//       `/api/users`
+//     ).then((res) => res.json());
+//     dispatch({ type: LOAD_USERS + SUCCESS, response });
+//   } catch (error) {
+//     dispatch({ type: LOAD_USERS + FAILURE, error });
+//   }
+// };
