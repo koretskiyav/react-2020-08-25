@@ -8,17 +8,20 @@ import {
   restaurantsListSelector,
   restaurantsLoadingSelector,
   restaurantsLoadedSelector,
+  usersLoadingSelector,
+  usersLoadedSelector,
 } from '../../redux/selectors';
-import { loadRestaurants } from '../../redux/actions';
+import { loadRestaurants, loadUsers } from '../../redux/actions';
 
-const Restaurants = ({ restaurants, loadRestaurants, loading, loaded }) => {
+const Restaurants = ({ restaurants, users, loadUsers, loadRestaurants }) => {
   useEffect(() => {
-    if (!loading && !loaded) loadRestaurants();
+    if (!restaurants.loading && !restaurants.loaded) loadRestaurants();
+    if (!users.loadingUsers && !users.loadedUsers) loadUsers();
   }, []); // eslint-disable-line
 
-  if (loading || !loaded) return <Loader />;
+  if (restaurants.loading || !restaurants.loaded) return <Loader />;
 
-  const tabs = restaurants.map((restaurant) => ({
+  const tabs = restaurants.restaurants.map((restaurant) => ({
     title: restaurant.name,
     content: <Restaurant {...restaurant} />,
   }));
@@ -27,18 +30,26 @@ const Restaurants = ({ restaurants, loadRestaurants, loading, loaded }) => {
 };
 
 Restaurants.propTypes = {
-  restaurants: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+  restaurants: PropTypes.shape({
+    restaurants: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }).isRequired
+    ).isRequired,
+  }).isRequired,
 };
 
 export default connect(
   (state) => ({
-    restaurants: restaurantsListSelector(state),
-    loading: restaurantsLoadingSelector(state),
-    loaded: restaurantsLoadedSelector(state),
+    restaurants: {
+      restaurants: restaurantsListSelector(state),
+      loading: restaurantsLoadingSelector(state),
+      loaded: restaurantsLoadedSelector(state),
+    },
+    users: {
+      loading: usersLoadingSelector(state),
+      loaded: usersLoadedSelector(state),
+    },
   }),
-  { loadRestaurants }
+  { loadRestaurants, loadUsers }
 )(Restaurants);

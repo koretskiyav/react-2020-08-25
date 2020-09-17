@@ -20,24 +20,22 @@ export default (state = initialState, action) => {
 
   switch (type) {
     case LOAD_RESTAURANTS + REQUEST:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
+      return produce(state, (draft) => {
+        draft.loading = true;
+        draft.loaded = null;
+      });
+
     case LOAD_RESTAURANTS + SUCCESS:
-      return {
-        ...state,
-        entities: arrToMap(response),
-        loading: false,
-        loaded: true,
-      };
+      return produce(state, (draft) => {
+        draft.entities = arrToMap(response);
+        draft.loading = false;
+        draft.loaded = true;
+      });
     case LOAD_RESTAURANTS + FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error,
-      };
+      return produce(state, (draft) => {
+        draft.loading = false;
+        draft.error = error;
+      });
     case ADD_REVIEW:
       return produce(state, (draft) => {
         draft.entities[payload.restaurantId].reviews.push(reviewId);
