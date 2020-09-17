@@ -33,7 +33,6 @@ export const loadProducts = (restaurantId) => ({
 });
 
 export const loadReviews = (restaurantId) => async (dispatch) => {
-  console.log('load reviews');
   dispatch({ type: LOAD_REVIEWS + REQUEST });
 
   try {
