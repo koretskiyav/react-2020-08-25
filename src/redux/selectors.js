@@ -6,9 +6,9 @@ const orderSelector = (state) => state.order;
 const productsSelector = (state) => state.products.entities;
 const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users.entities;
-const loadedProductsByRestIdList = (state) =>
+const loadedProductsByRestIdSelector = (state) =>
   state.products.loadedProductsByRestIdList;
-const loadedReviewsByRestIdList = (state) =>
+const loadedReviewsByRestIdSelector = (state) =>
   state.reviews.loadedReviewsByRestIdList;
 
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
@@ -28,14 +28,14 @@ export const productSelector = getById(productsSelector);
 const reviewSelector = getById(reviewsSelector);
 
 export const loadedProductsCheckSelector = createSelector(
-  loadedProductsByRestIdList,
+  loadedProductsByRestIdSelector,
   selectedRestaurantIdSelector,
   (loadedProductsByRestId, selectedRestaurantId) =>
     loadedProductsByRestId.includes(selectedRestaurantId)
 );
 
 export const loadedReviewsCheckSelector = createSelector(
-  loadedReviewsByRestIdList,
+  loadedReviewsByRestIdSelector,
   selectedRestaurantIdSelector,
   (loadedReviewsByRestId, selectedRestaurantId) =>
     loadedReviewsByRestId.includes(selectedRestaurantId)
