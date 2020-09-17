@@ -4,11 +4,14 @@ import { getAverage, getById, mapToArray } from './utils';
 const restaurantsSelector = (state) => state.restaurants.entities;
 const orderSelector = (state) => state.order;
 const productsSelector = (state) => state.products.entities;
-const reviewsSelector = (state) => state.reviews;
+const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users;
 
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
 export const restaurantsLoadedSelector = (state) => state.restaurants.loaded;
+export const reviewsLoadingSelector = (state) => state.reviews.loading;
+export const reviewsLoadedSelector = (state, props) =>
+  state.reviews.loaded[props.restaurantId] || false;
 export const productsLoadingSelector = (state) => state.products.loading;
 export const productsLoadedSelector = (state, props) =>
   state.products.loaded[props.id] || false;
@@ -32,7 +35,7 @@ export const averageRatingSelector = createSelector(
   reviewsSelector,
   (_, { reviews }) => reviews,
   (reviews, ids) => {
-    const ratings = ids.map((id) => reviews[id].rating);
+    const ratings = ids.map((id) => reviews[id]?.rating || 0);
     return Math.round(getAverage(ratings));
   }
 );
