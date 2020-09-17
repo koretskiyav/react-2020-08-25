@@ -58,7 +58,6 @@ Product.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   amount: productAmountSelector,
-  //product: productSelector,
 });
 
 // const mapStateToProps = (state, props) => ({
