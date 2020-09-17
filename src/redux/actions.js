@@ -8,6 +8,7 @@ import {
   REQUEST,
   SUCCESS,
   FAILURE,
+  LOAD_PRODUCTS
 } from './constants';
 
 export const increment = (id) => ({ type: INCREMENT, payload: { id } });
@@ -23,6 +24,11 @@ export const addReview = (review, restaurantId) => ({
 export const loadRestaurants = () => ({
   type: LOAD_RESTAURANTS,
   CallAPI: '/api/restaurants',
+});
+
+export const loadProducts = (restaurantId) => ({
+  type: LOAD_PRODUCTS,
+  CallAPI: `/api/products?id=${restaurantId}`,
 });
 
 export const loadReviews = (restaurantId) => async (dispatch) => {
