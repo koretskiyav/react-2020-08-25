@@ -1,49 +1,55 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import Product from '../product';
 
 import styles from './menu.module.css';
 import Basket from '../basket';
 
-class Menu extends React.Component {
-  static propTypes = {
-    menu: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  };
+import { loadProducts } from '../../redux/actions';
+import {
+  selectedRestaurantIdSelector,
+  productsLoadingSelector,
+  productsLoadedSelector,
+  loadedProductsCheckSelector,
+} from '../../redux/selectors';
+import Loader from '../loader';
 
-  state = { error: null };
+const Menu = (props) => {
+  const {
+    menu,
+    loadProducts,
+    activeRestaurant,
+    loading,
+    loaded,
+    alreadyLoadedProducts,
+  } = props;
 
-  componentDidCatch(error) {
-    this.setState({ error });
+  useEffect(() => {
+    !alreadyLoadedProducts && loadProducts(activeRestaurant);
+  }, [activeRestaurant]);
+
+  if (loading || !loaded) {
+    return <Loader />;
   }
 
-  render() {
-    const { menu } = this.props;
-
-    if (this.state.error) {
-      return <p>{this.state.error.message}</p>;
-    }
-
-    return (
-      <div className={styles.menu}>
-        <div>
-          {menu.map((id) => (
-            <Product key={id} id={id} />
-          ))}
-        </div>
-        <div>
-          <Basket />
-        </div>
+  return (
+    <div className={styles.menu}>
+      <div>
+        {menu.map((id) => (
+          <Product key={id} id={id} />
+        ))}
       </div>
-    );
-  }
-}
+      <div>
+        <Basket />
+      </div>
+    </div>
+  );
+};
 
-// Menu.propTypes = {
-//   menu: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//     }).isRequired
-//   ).isRequired,
-// };
-
-export default Menu;
+const mapStateToProps = (state) => ({
+  activeRestaurant: selectedRestaurantIdSelector(state),
+  alreadyLoadedProducts: loadedProductsCheckSelector(state),
+  loading: productsLoadingSelector(state),
+  loaded: productsLoadedSelector(state),
+});
+export default connect(mapStateToProps, { loadProducts })(Menu);

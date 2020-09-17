@@ -4,6 +4,7 @@ import {
   FAILURE,
   LOAD_RESTAURANTS,
   REQUEST,
+  SELECT_RESTAURANT,
   SUCCESS,
 } from '../constants';
 import { arrToMap } from '../utils';
@@ -13,12 +14,17 @@ const initialState = {
   loading: false,
   loaded: false,
   error: null,
+  selectedRestaurantId: null,
 };
 
 export default (state = initialState, action) => {
   const { type, payload, reviewId, response, error } = action;
 
   switch (type) {
+    case SELECT_RESTAURANT:
+      return produce(state, (draft) => {
+        draft.selectedRestaurantId = payload;
+      });
     case LOAD_RESTAURANTS + REQUEST:
       return {
         ...state,
@@ -29,6 +35,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         entities: arrToMap(response),
+        selectedRestaurantId: response[0].id,
         loading: false,
         loaded: true,
       };

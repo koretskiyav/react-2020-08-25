@@ -9,6 +9,11 @@ const Tabs = ({ tabs }) => {
 
   const { content } = tabs[activeTab];
 
+  const onTabClickHandler = (index) => {
+    tabs[index].onTabClick && tabs[index].onTabClick();
+    setActiveTab(index);
+  };
+
   return (
     <>
       <div className={styles.tabs}>
@@ -16,7 +21,9 @@ const Tabs = ({ tabs }) => {
           <span
             key={title}
             className={cn(styles.tab, { [styles.active]: index === activeTab })}
-            onClick={() => setActiveTab(index)}
+            onClick={() => {
+              onTabClickHandler(index);
+            }}
           >
             {title}
           </span>
