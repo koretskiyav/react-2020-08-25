@@ -1,4 +1,4 @@
-import { ADD_REVIEW, LOAD_REVIEWS, REQUEST, SUCCESS, FAILURE } from '../constants';
+import { ADD_REVIEW, LOAD_REVIEWS, REQUEST, SUCCESS, FAILURE, DROP_REVIEWS } from '../constants';
 import { arrToMap } from '../utils';
 
 const initialState = {
@@ -40,6 +40,8 @@ export default (state = initialState, action) => {
           [reviewId]: { id: reviewId, userId, text, rating }
         }
       };
+    case DROP_REVIEWS:
+      return initialState;  
     default:
       return state;
   }

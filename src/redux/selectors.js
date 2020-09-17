@@ -41,6 +41,8 @@ export const averageRatingSelector = createSelector(
   reviewsSelector,
   (_, { reviews }) => reviews,
   (reviews, ids) => {
+    console.log(reviews);
+    console.log(ids);
     if (Object.keys(reviews).length === 0 && reviews.constructor === Object) return 0;
     const ratings = ids.map((id) => reviews[id].rating);
     return Math.round(getAverage(ratings));

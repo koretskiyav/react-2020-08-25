@@ -9,12 +9,15 @@ import {
   SUCCESS,
   FAILURE,
   LOAD_PRODUCTS,
-  LOAD_USERS
+  LOAD_USERS,
+  DROP_REVIEWS
 } from './constants';
 
 export const increment = (id) => ({ type: INCREMENT, payload: { id } });
 export const decrement = (id) => ({ type: DECREMENT, payload: { id } });
 export const remove = (id) => ({ type: REMOVE, payload: { id } });
+
+export const dropReviews = () => ({type: DROP_REVIEWS});
 
 export const addReview = (review, restaurantId) => ({
   type: ADD_REVIEW,
@@ -33,13 +36,13 @@ export const loadProducts = (restaurantId) => ({
 });
 
 export const loadReviews = (restaurantId) => async (dispatch) => {
-  dispatch({ type: LOAD_REVIEWS + REQUEST });
+  dispatch({ type: LOAD_REVIEWS + REQUEST, restaurantId });
 
   try {
     const response = await fetch(
       `/api/reviews?id=${restaurantId}`
     ).then((res) => res.json());
-    dispatch({ type: LOAD_REVIEWS + SUCCESS, response });
+    dispatch({ type: LOAD_REVIEWS + SUCCESS, response, restaurantId });
   } catch (error) {
     dispatch({ type: LOAD_REVIEWS + FAILURE, error });
   }

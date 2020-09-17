@@ -11,7 +11,7 @@ import Loader from '../loader';
 import { 
   averageRatingSelector,   
   reviewsLoadingSelector,
-  reviewsLoadedSelector,
+  reviewsLoadedSelector
 } from '../../redux/selectors';
 
 const Restaurant = ({ id, name, menu, reviews, averageRating, loading, loaded }) => {

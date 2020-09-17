@@ -15,6 +15,7 @@ import { loadReviews} from '../../redux/actions';
 
 const Reviews = ({ reviews, restaurantId, loadReviews, loading, loaded }) => {
   useEffect(() => {
+    console.log('load reviews');
     if (!loading && !loaded) loadReviews(restaurantId);
   }, [restaurantId]); // eslint-disable-line
 
