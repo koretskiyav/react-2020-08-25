@@ -9,9 +9,23 @@ import { increment, decrement } from '../../redux/actions';
 import Button from '../button';
 import { productAmountSelector, productSelector } from '../../redux/selectors';
 
-const Product = ({ product, amount, increment, decrement, fetchData }) => {
+import { loadProducts } from '../../redux/actions';
+
+const Product = ({
+  product,
+  amount,
+  increment,
+  decrement,
+  fetchData,
+  loadProducts,
+}) => {
   useEffect(() => {
     fetchData && fetchData(product.id);
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    loadProducts();
     // eslint-disable-next-line
   }, []);
 

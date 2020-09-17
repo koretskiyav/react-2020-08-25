@@ -1,6 +1,6 @@
 import produce from 'immer';
 import { ADD_REVIEW } from '../constants';
-import { normalizedUsers } from '../../fixtures';
+//import { normalizedUsers } from '../../fixtures';
 import { arrToMap } from '../utils';
 
 export default produce((draft = arrToMap(normalizedUsers), action) => {

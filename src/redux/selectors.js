@@ -10,6 +10,10 @@ const usersSelector = (state) => state.users;
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
 export const restaurantsLoadedSelector = (state) => state.restaurants.loaded;
 
+//--
+export const rewiewsLoadingSelector = (state) => state.rewiews.loading;
+export const rewiewsLoadedSelector = (state) => state.rewiews.loaded;
+
 export const restaurantsListSelector = mapToArray(restaurantsSelector);
 export const productAmountSelector = getById(orderSelector, 0);
 export const productSelector = getById(productsSelector);
