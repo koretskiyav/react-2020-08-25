@@ -22,7 +22,7 @@ export default produce((draft = initialState, action) => {
     case LOAD_REVIEWS + SUCCESS:
       draft.loaded[payload.id] = true;
       draft.loading = false;
-      draft.entities = arrToMap(response);
+      draft.entities = { ...draft.entities, ...arrToMap(response) };
       break;
     case LOAD_REVIEWS + REQUEST:
       draft.loading = true;

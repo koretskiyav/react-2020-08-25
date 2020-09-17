@@ -7,7 +7,7 @@ export default produce((draft = {}, action) => {
 
   switch (type) {
     case LOAD_USERS + SUCCESS:
-      return arrToMap(response);
+      return { ...draft, ...arrToMap(response) };
     case ADD_REVIEW:
       const { name } = payload.review;
       draft[userId] = { id: userId, name };
