@@ -7,7 +7,7 @@ import Basket from '../basket';
 
 import { connect } from 'react-redux';
 import {
-  productsListSelector,
+  productsListByRestaurantelector,
   productsLoadingSelector,
   productsLoadedSelector,
 } from '../../redux/selectors';
@@ -56,8 +56,10 @@ class Menu extends React.Component {
   }
 }
 
-export default connect((state) => ({
-  products: productsListSelector(state),
+export default connect((state, ownProps) => ({
+  products: productsListByRestaurantelector(state, {
+    id: ownProps.restaurantId,
+  }),
   loading: productsLoadingSelector(state),
   loaded: productsLoadedSelector(state),
 }))(Menu);

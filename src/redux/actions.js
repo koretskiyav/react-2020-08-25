@@ -43,6 +43,7 @@ export const loadReviews = (restaurantId) => async (dispatch) => {
 export const loadProducts = (id) => ({
   type: LOAD_PRODUCTS,
   CallAPI: `/api/products?id=${id}`,
+  restaurantId: id,
 });
 
 export const loadUsers = () => async (dispatch) => {

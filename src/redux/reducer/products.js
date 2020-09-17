@@ -6,11 +6,12 @@ const initialState = {
   loading: false,
   loaded: false,
   error: null,
+  loadedByRestaurant: [],
 };
 
 // { [productId]: product }
 export default (state = initialState, action) => {
-  const { type, response, error } = action;
+  const { type, response, error, restaurantId } = action;
 
   switch (type) {
     case LOAD_PRODUCTS + REQUEST:
@@ -25,6 +26,7 @@ export default (state = initialState, action) => {
         entities: mergeObject(state.entities, arrToMap(response)),
         loading: false,
         loaded: true,
+        loadedByRestaurant: [...state.loadedByRestaurant, restaurantId],
       };
     case LOAD_PRODUCTS + FAILURE:
       return {

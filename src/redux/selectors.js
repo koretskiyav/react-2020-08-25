@@ -19,18 +19,28 @@ export const reviewsLoadedSelector = (state) => state.reviews.loaded;
 export const usersLoadingSelector = (state) => state.users.loading;
 export const usersLoadedSelector = (state) => state.users.loaded;
 
+export const loadedByRestaurant = (state) => state.products.loadedByRestaurant;
+
 export const restaurantsListSelector = mapToArray(restaurantsSelector);
 export const usersListSelector = mapToArray(usersSelector);
-export const productsListSelector = mapToArray(productsSelector);
 export const productAmountSelector = getById(orderSelector, 0);
 export const productSelector = getById(productsSelector);
 export const reviewsListSelector = mapToArray(reviewsSelector);
 
-export const reviewsWithUsersListSelector = createSelector(
+export const restaurantByIdSelector = getById(restaurantsSelector, 0);
+export const reviewsByRestaurantSelector = createSelector(
+  restaurantByIdSelector,
   reviewsListSelector,
+  (restaurant, reviews) => {
+    return reviews.filter((review) => restaurant.reviews.includes(review.id));
+  }
+);
+
+export const reviewsWithUsersListSelector = createSelector(
+  reviewsByRestaurantSelector,
   usersSelector,
   (reviews, users) => {
-    if (!reviews.length) return 0;
+    if (!reviews.length) return [];
     return reviews.map((review) => ({
       ...review,
       user: users[review.userId].name,
@@ -38,8 +48,16 @@ export const reviewsWithUsersListSelector = createSelector(
   }
 );
 
+export const productsListByRestaurantelector = createSelector(
+  restaurantByIdSelector,
+  mapToArray(productsSelector),
+  ({ menu }, products) => {
+    return products.filter((product) => menu.includes(product.id));
+  }
+);
+
 export const averageRatingSelector = createSelector(
-  reviewsListSelector,
+  reviewsByRestaurantSelector,
   (reviews) => {
     if (!reviews.length) return 0;
     const ratings = reviews.map(({ rating }) => rating);

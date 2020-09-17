@@ -13,7 +13,6 @@ import Loader from '../loader';
 
 const Reviews = ({ reviews, restaurantId, loading, loaded }) => {
   if (loading || !loaded) return <Loader />;
-
   return (
     <div className={styles.reviews}>
       {reviews.map((review) => (
@@ -35,8 +34,8 @@ Reviews.propTypes = {
   ).isRequired,
 };
 
-export default connect((state) => ({
-  reviews: reviewsWithUsersListSelector(state),
+export default connect((state, ownProps) => ({
+  reviews: reviewsWithUsersListSelector(state, { id: ownProps.restaurantId }),
   loading: reviewsLoadingSelector(state),
   loaded: reviewsLoadedSelector(state),
 }))(Reviews);
