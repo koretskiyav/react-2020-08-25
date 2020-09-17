@@ -9,6 +9,7 @@ import {
   REQUEST,
   SUCCESS,
   FAILURE,
+  LOAD_STATE_PRODUCTS,
 } from './constants';
 
 export const increment = (id) => ({ type: INCREMENT, payload: { id } });
@@ -49,6 +50,38 @@ export const loadProducts = (restaurantId) => async (dispatch) => {
     dispatch({ type: LOAD_PRODUCTS + SUCCESS, response });
   } catch (error) {
     dispatch({ type: LOAD_PRODUCTS + FAILURE, error });
+  }
+};
+export const loadAllProducts = (menuRestaurant) => async (dispatch) => {
+  dispatch({ type: LOAD_PRODUCTS + REQUEST });
+
+  try {
+    const response = await fetch(`/api/products`).then((res) => res.json());
+    dispatch({ type: LOAD_PRODUCTS + SUCCESS, response });
+
+    const dataMenu = loadRestaurantProducts(menuRestaurant, response);
+    dataMenu(dispatch);
+  } catch (error) {
+    dispatch({ type: LOAD_PRODUCTS + FAILURE, error });
+  }
+};
+
+export const loadRestaurantProducts = (menuRestaurant, allProducts) => async (
+  dispatch
+) => {
+  try {
+    const cacheProducts = menuRestaurant.reduce((acc, menuProduct) => {
+      const results = { ...acc };
+
+      results[menuProduct] = allProducts.find((product) => {
+        return menuProduct === product.id;
+      });
+      return results;
+    }, {});
+
+    dispatch({ type: LOAD_STATE_PRODUCTS + SUCCESS, response: cacheProducts });
+  } catch (error) {
+    dispatch({ type: LOAD_STATE_PRODUCTS + FAILURE, error });
   }
 };
 

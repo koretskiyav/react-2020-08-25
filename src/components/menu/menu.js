@@ -8,10 +8,11 @@ import { connect } from 'react-redux';
 
 import {
   productSelector,
+  productCurrentSelector,
   productsLoadingSelector,
   productsLoadedSelector,
 } from '../../redux/selectors';
-import { loadProducts } from '../../redux/actions';
+import { loadAllProducts, loadRestaurantProducts } from '../../redux/actions';
 import Loader from '../loader';
 
 class Menu extends React.Component {
@@ -22,15 +23,18 @@ class Menu extends React.Component {
   state = { error: null };
 
   componentDidMount() {
-    this.props.loadProducts(this.props.restaurantId);
+    this.props.loadAllProducts(this.props.menu);
   }
 
   componentDidCatch(error) {
     this.setState({ error });
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.restaurantId != this.props.restaurantId) {
-      this.props.loadProducts(this.props.restaurantId);
+    if (prevProps.restaurantId !== this.props.restaurantId) {
+      this.props.loadRestaurantProducts(
+        this.props.menu,
+        this.props.allProducts
+      );
     }
   }
 
@@ -43,7 +47,7 @@ class Menu extends React.Component {
     return (
       <div className={styles.menu}>
         <div>
-          {this.props.product.map((product) => (
+          {this.props.products.map((product) => (
             <Product key={product.id} id={product.id} />
           ))}
         </div>
@@ -64,7 +68,8 @@ class Menu extends React.Component {
 // };
 
 const mapStateToProps = (state) => ({
-  product: productSelector(state),
+  allProducts: productSelector(state),
+  products: productCurrentSelector(state),
   loading: productsLoadingSelector(state),
   loaded: productsLoadedSelector(state),
 });
@@ -75,7 +80,8 @@ const mapStateToProps = (state) => ({
 // });
 
 const mapDispatchToProps = {
-  loadProducts,
+  loadAllProducts,
+  loadRestaurantProducts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

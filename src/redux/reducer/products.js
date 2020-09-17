@@ -12,11 +12,18 @@
 // };
 
 import produce from 'immer';
-import { FAILURE, LOAD_PRODUCTS, REQUEST, SUCCESS } from '../constants';
+import {
+  FAILURE,
+  LOAD_PRODUCTS,
+  REQUEST,
+  SUCCESS,
+  LOAD_STATE_PRODUCTS,
+} from '../constants';
 import { arrToMap } from '../utils';
 
 const initialState = {
   entities: {},
+  current: {},
   loading: false,
   loaded: false,
   error: null,
@@ -38,6 +45,13 @@ export default (state = initialState, action) => {
         entities: arrToMap(response),
         loading: false,
         loaded: true,
+      };
+    case LOAD_STATE_PRODUCTS + SUCCESS:
+      console.log('response', response);
+
+      return {
+        ...state,
+        current: response,
       };
 
     case LOAD_PRODUCTS + FAILURE:
