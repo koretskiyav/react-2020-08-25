@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import { connect } from 'react-redux';
 
 import styles from './tabs.module.css';
 
-const Tabs = ({ tabs }) => {
+const Tabs = ({ tabs, action }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const { content } = tabs[activeTab];
@@ -16,7 +17,12 @@ const Tabs = ({ tabs }) => {
           <span
             key={title}
             className={cn(styles.tab, { [styles.active]: index === activeTab })}
-            onClick={() => setActiveTab(index)}
+            onClick={() => {
+              setActiveTab(index);
+              if (action){
+                action();
+              }
+            }}
           >
             {title}
           </span>
@@ -37,3 +43,4 @@ Tabs.propTypes = {
 };
 
 export default Tabs;
+
