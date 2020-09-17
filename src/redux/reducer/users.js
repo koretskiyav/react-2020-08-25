@@ -28,7 +28,7 @@ export default produce((draft = initialState, action) => {
       	break;
     case ADD_REVIEW:
       const { name } = payload.review;
-      draft[userId] = { id: userId, name };
+      draft.entities[userId] = { id: userId, name };
       break;
     default:
       return draft;
