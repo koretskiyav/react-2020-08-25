@@ -29,6 +29,13 @@ export const productAmountSelector = getById(orderSelector);
 export const productSelector = getById(productsSelector);
 const reviewSelector = getById(reviewsSelector);
 
+export const getRestaurantByProduct = ({ id: productId }) =>
+  createSelector(restaurantsListSelector, (restaurants) =>
+    Object.values(restaurants).find((restaurant) =>
+      restaurant.menu.includes(productId)
+    )
+  );
+
 export const reviewWitUserSelector = createSelector(
   reviewSelector,
   usersSelector,
