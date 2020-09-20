@@ -8,19 +8,21 @@ import Banner from '../banner';
 import Rate from '../rate';
 import { connect } from 'react-redux';
 import { averageRatingSelector } from '../../redux/selectors';
-import styles from './restaurant.module.css';
-import { NavLink, Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import Tabs from '../tabs';
 
 const Restaurant = ({ id, name, menu, reviews, averageRating, match }) => {
   const tabs = [
     {
       title: 'Menu',
-      url: 'menu',
+      url: `${match.url}/menu`,
+      path: `${match.path}/menu`,
       content: <Menu menu={menu} restaurantId={id} />,
     },
     {
       title: 'Review',
-      url: 'review',
+      url: `${match.url}/review`,
+      path: `${match.path}/review`,
       content: <Reviews reviews={reviews} restaurantId={id} />,
     },
   ];
@@ -31,27 +33,12 @@ const Restaurant = ({ id, name, menu, reviews, averageRating, match }) => {
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
 
-      <div className={styles.tabs}>
-        {tabs.map(({ title, url }) => (
-          <NavLink
-            key={`link_${title}`}
-            to={`${match.url}/${url}`}
-            className={styles.tab}
-            activeClassName={styles.active}
-          >
-            {title}
-          </NavLink>
-        ))}
-      </div>
+      <Tabs tabs={tabs} />
 
       <Switch>
         <Redirect from={`${match.path}`} to={`${match.path}/menu`} exact />
-        {tabs.map(({ title, url, content }) => (
-          <Route
-            key={`route_${title}`}
-            path={`${match.path}/${url}`}
-            render={() => content}
-          />
+        {tabs.map(({ title, path, content }) => (
+          <Route key={`route_${title}`} path={path} render={() => content} />
         ))}
       </Switch>
     </div>
