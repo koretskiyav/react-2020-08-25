@@ -7,12 +7,18 @@ export default (state = {}, action) => {
     case INCREMENT:
       return {
         ...state,
-        [payload.id]: (state[payload.id] || 0) + 1,
+        [payload.id]: {
+          value: (state[payload.id]?.value || 0) + 1,
+          restaurantId: payload.restaurantId,
+        },
       };
     case DECREMENT:
       return {
         ...state,
-        [payload.id]: Math.max((state[payload.id] || 0) - 1, 0),
+        [payload.id]: {
+          value: Math.max((state[payload.id]?.value || 0) - 1, 0),
+          restaurantId: payload.restaurantId,
+        },
       };
     case REMOVE:
       return {

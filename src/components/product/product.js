@@ -9,7 +9,13 @@ import { increment, decrement } from '../../redux/actions';
 import Button from '../button';
 import { productAmountSelector, productSelector } from '../../redux/selectors';
 
-const Product = ({ product, amount = 0, increment, decrement }) => {
+const Product = ({
+  product,
+  amount = 0,
+  increment,
+  decrement,
+  restaurantId,
+}) => {
   if (!product) return null;
 
   return (
@@ -27,12 +33,12 @@ const Product = ({ product, amount = 0, increment, decrement }) => {
             </div>
             <div className={styles.buttons}>
               <Button
-                onClick={() => decrement(product.id)}
+                onClick={() => decrement(product.id, restaurantId)}
                 data-id="product-decrement"
                 icon="minus"
               />
               <Button
-                onClick={() => increment(product.id)}
+                onClick={() => increment(product.id, restaurantId)}
                 data-id="product-increment"
                 icon="plus"
               />

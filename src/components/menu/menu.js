@@ -58,11 +58,11 @@ class Menu extends React.Component {
       <div className={styles.menu}>
         <div>
           {menu.map((id) => (
-            <Product key={id} id={id} />
+            <Product key={id} id={id} restaurantId={this.props.restaurantId} />
           ))}
         </div>
         <div>
-          <Basket />
+          <Basket restaurantId={this.props.restaurantId} />
         </div>
       </div>
     );

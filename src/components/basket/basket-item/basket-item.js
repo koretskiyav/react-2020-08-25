@@ -13,6 +13,7 @@ function BasketItem({
   increment,
   decrement,
   remove,
+  restaurantId,
 }) {
   return (
     <div className={styles.basketItem}>
@@ -24,14 +25,14 @@ function BasketItem({
       <div className={styles.info}>
         <div className={styles.counter}>
           <Button
-            onClick={() => decrement(product.id)}
+            onClick={() => decrement(product.id, restaurantId)}
             icon="minus"
             secondary
             small
           />
           <span className={styles.count}>{amount}</span>
           <Button
-            onClick={() => increment(product.id)}
+            onClick={() => increment(product.id, restaurantId)}
             icon="plus"
             secondary
             small
