@@ -12,7 +12,7 @@ const Tabs = ({ tabs }) => {
   return (
     <>
       <div className={styles.tabs}>
-        {tabs.map(({ title }, index) => (
+        {tabs.map(({ id, title }, index) => (
           <span
             key={title}
             className={cn(styles.tab, { [styles.active]: index === activeTab })}
@@ -20,11 +20,17 @@ const Tabs = ({ tabs }) => {
           >
             {title}
           </span>
+          <Link to={`/restaurants/${id}/reviews`}>{title}</Link>
+          <Link to={`/restaurants/${id}/menu`}>{title}</Link>
         ))}
       </div>
       {content}
     </>
   );
+
+  return <Route path="/restaurants/:restId/reviews" component={Rewiews} />
+  return <Route path="/restaurants/:restId/menu" component={Menu} />
+
 };
 
 Tabs.propTypes = {
