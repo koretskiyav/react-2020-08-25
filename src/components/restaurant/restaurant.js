@@ -13,8 +13,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import styles from '../restaurants/restaurants.module.css';
 
 const Restaurant = ({ id, name, menu, reviews, averageRating, match }) => {
-  console.log(`${match.url}/products`);
-  const path = `${match.url}`;
+
   return (
     <div>
       <Banner heading={name}>
