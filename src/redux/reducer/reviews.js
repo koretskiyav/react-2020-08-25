@@ -16,23 +16,23 @@ const initialState = {
 };
 
 export default produce((draft = initialState, action) => {
-  const { type, payload, reviewId, userId, restaurantId, response } = action;
+  const { type, payload, userId, id, response, reviewId } = action;
 
   switch (type) {
     case LOAD_REVIEWS + REQUEST: {
       draft.error = null;
-      draft.loading[restaurantId] = true;
+      draft.loading[id] = true;
       break;
     }
     case LOAD_REVIEWS + SUCCESS: {
-      draft.loading[restaurantId] = false;
-      draft.loaded[restaurantId] = true;
+      draft.loading[id] = false;
+      draft.loaded[id] = true;
       draft.entities = { ...draft.entities, ...arrToMap(response) };
       break;
     }
     case LOAD_REVIEWS + FAILURE: {
-      draft.loading[restaurantId] = false;
-      draft.loaded[restaurantId] = false;
+      draft.loading[id] = false;
+      draft.loaded[id] = false;
       draft.error = action.error;
       break;
     }

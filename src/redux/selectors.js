@@ -17,14 +17,15 @@ export const productsLoadedSelector = (state, props) =>
   state.products.loaded[props.restaurantId];
 
 export const reviewsLoadingSelector = (state, props) =>
-  state.reviews.loading[props.restaurantId];
+  state.reviews.loading[props.id] || false;
 export const reviewsLoadedSelector = (state, props) =>
-  state.reviews.loaded[props.restaurantId];
+  state.reviews.loaded[props.id] || false;
 
 export const usersLoadingSelector = (state) => state.users.loading;
 export const usersLoadedSelector = (state) => state.users.loaded;
 
 export const restaurantsListSelector = mapToArray(restaurantsSelector);
+export const restaurantSelector = getById(restaurantsSelector);
 export const productAmountSelector = getById(orderSelector);
 export const productSelector = getById(productsSelector);
 const reviewSelector = getById(reviewsSelector);
