@@ -18,13 +18,13 @@ import {
   reviewsLoadedSelector,
 } from './selectors';
 
-export const increment = (id, restaurantId) => ({
+export const increment = (id) => ({
   type: INCREMENT,
-  payload: { id, restaurantId },
+  payload: { id },
 });
-export const decrement = (id, restaurantId) => ({
+export const decrement = (id) => ({
   type: DECREMENT,
-  payload: { id, restaurantId },
+  payload: { id },
 });
 export const remove = (id) => ({ type: REMOVE, payload: { id } });
 

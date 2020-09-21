@@ -5,6 +5,8 @@ import { increment, decrement, remove } from '../../../redux/actions';
 import Button from '../../button';
 import styles from './basket-item.module.css';
 import { Link } from 'react-router-dom';
+import { restaurantByIdProduct } from '../../../redux/selectors';
+import { createStructuredSelector } from 'reselect';
 
 function BasketItem({
   product,
@@ -13,11 +15,11 @@ function BasketItem({
   increment,
   decrement,
   remove,
-  restaurantId,
+  restaurantByIdProduct,
 }) {
   return (
     <div className={styles.basketItem}>
-      <Link to={`/restaurants/${product.restaurantId}`}>
+      <Link to={`/restaurants/${restaurantByIdProduct}`}>
         <div className={styles.name}>
           <span>{product.name}</span>
         </div>
@@ -25,14 +27,14 @@ function BasketItem({
       <div className={styles.info}>
         <div className={styles.counter}>
           <Button
-            onClick={() => decrement(product.id, restaurantId)}
+            onClick={() => decrement(product.id)}
             icon="minus"
             secondary
             small
           />
           <span className={styles.count}>{amount}</span>
           <Button
-            onClick={() => increment(product.id, restaurantId)}
+            onClick={() => increment(product.id)}
             icon="plus"
             secondary
             small
@@ -50,4 +52,13 @@ function BasketItem({
   );
 }
 
-export default connect(null, { increment, decrement, remove })(BasketItem);
+export default connect(
+  createStructuredSelector({
+    restaurantByIdProduct,
+  }),
+  {
+    increment,
+    decrement,
+    remove,
+  }
+)(BasketItem);
