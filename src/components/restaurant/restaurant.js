@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
+import { NavLink, Route, Switch } from 'react-router-dom';
 
 import Menu from '../menu';
 import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
-import Tabs from '../tabs';
 import { connect } from 'react-redux';
 import { averageRatingSelector } from '../../redux/selectors';
+import styles from '../restaurants/restaurants.module.css';
 
 const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
   const tabs = [
-    { title: 'Menu', content: <Menu menu={menu} restaurantId={id} /> },
-    {
-      title: 'Reviews',
-      content: <Reviews reviews={reviews} restaurantId={id} />,
-    },
+    { title: 'Menu', to: 'menu' },
+    { title: 'Reviews', to: 'reviews' },
   ];
 
   return (
@@ -24,7 +22,26 @@ const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
       <Banner heading={name}>
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
-      <Tabs tabs={tabs} />
+      {tabs.map(({ title, to }) => (
+        <NavLink
+          key={title}
+          to={`/restaurants/${id}/${to}`}
+          className={styles.tab}
+          activeClassName={styles.active}
+        >
+          {title}
+        </NavLink>
+      ))}
+      <Switch>
+        <Route
+          path={`/restaurants/${id}/menu`}
+          render={() => <Menu menu={menu} restaurantId={id} />}
+        />
+        <Route
+          path={`/restaurants/${id}/reviews`}
+          render={() => <Reviews reviews={reviews} restaurantId={id} />}
+        />
+      </Switch>
     </div>
   );
 };

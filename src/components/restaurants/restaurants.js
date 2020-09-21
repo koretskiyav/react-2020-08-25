@@ -18,7 +18,7 @@ const Restaurants = ({ restaurants, match, history }) => {
         {restaurants.map(({ id, name }, index) => (
           <NavLink
             key={id}
-            to={`/restaurants/${id}`}
+            to={`/restaurants/${id}/menu`}
             className={styles.tab}
             activeClassName={styles.active}
           >
