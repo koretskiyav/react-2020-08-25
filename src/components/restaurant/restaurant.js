@@ -6,15 +6,23 @@ import Menu from '../menu';
 import Reviews from '../reviews';
 import Banner from '../banner';
 import Rate from '../rate';
-import Tabs from '../tabs';
 import { connect } from 'react-redux';
 import { averageRatingSelector } from '../../redux/selectors';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import Tabs from '../tabs';
 
-const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
+const Restaurant = ({ id, name, menu, reviews, averageRating, match }) => {
   const tabs = [
-    { title: 'Menu', content: <Menu menu={menu} restaurantId={id} /> },
     {
-      title: 'Reviews',
+      title: 'Menu',
+      url: `${match.url}/menu`,
+      path: `${match.path}/menu`,
+      content: <Menu menu={menu} restaurantId={id} />,
+    },
+    {
+      title: 'Review',
+      url: `${match.url}/review`,
+      path: `${match.path}/review`,
       content: <Reviews reviews={reviews} restaurantId={id} />,
     },
   ];
@@ -24,7 +32,15 @@ const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
       <Banner heading={name}>
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
+
       <Tabs tabs={tabs} />
+
+      <Switch>
+        <Redirect from={`${match.path}`} to={`${match.path}/menu`} exact />
+        {tabs.map(({ title, path, content }) => (
+          <Route key={`route_${title}`} path={path} render={() => content} />
+        ))}
+      </Switch>
     </div>
   );
 };
@@ -41,4 +57,4 @@ export default connect(
   createStructuredSelector({
     averageRating: averageRatingSelector,
   })
-)(Restaurant);
+)(withRouter(Restaurant));
