@@ -42,7 +42,12 @@ function RestaurantsPage({
   return (
     <Switch>
       <Route path="/restaurants/:restId/menu" component={Restaurants} />
-      <Route path="/restaurants/:restId/review" component={RestaurantReview} />
+      <Route
+        path="/restaurants/:restId/review"
+        render={({ match }) => (
+          <RestaurantReview pageType="review" match={match} />
+        )}
+      />
       <Route path="/restaurants/:restId" component={Restaurants} />
     </Switch>
   );

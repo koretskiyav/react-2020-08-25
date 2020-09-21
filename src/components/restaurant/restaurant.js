@@ -11,8 +11,6 @@ import { connect } from 'react-redux';
 import { averageRatingSelector } from '../../redux/selectors';
 
 const Restaurant = ({ id, name, menu, reviews, averageRating, match }) => {
-  console.log('Match: ', match);
-
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} restaurantId={id} /> },
     {
