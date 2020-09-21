@@ -9,7 +9,7 @@ import { increment, decrement } from '../../redux/actions';
 import Button from '../button';
 import { productAmountSelector, productSelector } from '../../redux/selectors';
 
-const Product = ({ product, amount = 0, increment, decrement }) => {
+const Product = ({ product, restId, amount = 0, increment, decrement }) => {
   if (!product) return null;
 
   return (
@@ -32,7 +32,7 @@ const Product = ({ product, amount = 0, increment, decrement }) => {
                 icon="minus"
               />
               <Button
-                onClick={() => increment(product.id)}
+                onClick={() => increment(product.id, restId)}
                 data-id="product-increment"
                 icon="plus"
               />
@@ -50,7 +50,6 @@ Product.propTypes = {
     price: PropTypes.number,
     ingredients: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }),
-  amount: PropTypes.number,
   increment: PropTypes.func,
   decrement: PropTypes.func,
 };
@@ -64,5 +63,4 @@ const mapDispatchToProps = {
   increment,
   decrement,
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

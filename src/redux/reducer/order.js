@@ -8,6 +8,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         [payload.id]: (state[payload.id] || 0) + 1,
+        restId: payload.restId,
       };
     case DECREMENT:
       return {
