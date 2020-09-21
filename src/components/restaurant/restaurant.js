@@ -10,7 +10,9 @@ import Tabs from '../tabs';
 import { connect } from 'react-redux';
 import { averageRatingSelector } from '../../redux/selectors';
 
-const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
+const Restaurant = ({ id, name, menu, reviews, averageRating, match }) => {
+  console.log('Match: ', match);
+
   const tabs = [
     { title: 'Menu', content: <Menu menu={menu} restaurantId={id} /> },
     {
@@ -24,6 +26,7 @@ const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
       <Banner heading={name}>
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
+
       <Tabs tabs={tabs} />
     </div>
   );
