@@ -31,15 +31,16 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "npm run format-staged"
     }
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"yarn api\"",
+    "start": "concurrently \"react-scripts start\" \"npm run api\"",
     "api": "node simple_api/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format-staged": "pretty-quick --staged"
   },
   "eslintConfig": {
     "extends": "react-app"
