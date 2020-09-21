@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Header from '../header';
 import Basket from '../basket';
 import RestaurantsPage from '../../pages/restaurants-page';
+import Tabs from '../tabs';
 
 export default class App extends PureComponent {
   render() {
@@ -10,6 +11,8 @@ export default class App extends PureComponent {
       <div>
         <Header />
         <Switch>
+          <Route path="/menu" component={Tabs} />
+          <Route path="/reviews" component={Tabs} />
           <Route path="/checkout" component={Basket} />
           <Route path="/restaurants" component={RestaurantsPage} />
           <Route path="/" render={() => <div>404 - not found</div>} />
