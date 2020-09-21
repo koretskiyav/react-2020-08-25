@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import Restaurants from '../components/restaurants';
+import RestaurantReview from '../components/restaurantreview';
 import Loader from '../components/loader';
 import {
   restaurantsListSelector,
@@ -31,14 +32,25 @@ function RestaurantsPage({
         <h2>select restaurant:</h2>
         {restaurants.map(({ id, name }) => (
           <p key={id}>
-            <Link to={`/restaurants/${id}`}>{name}</Link>
+            <Link to={`/restaurants/${id}/menu`}>{name}</Link>
           </p>
         ))}
       </div>
     );
   }
 
-  return <Route path="/restaurants/:restId" component={Restaurants} />;
+  return (
+    <Switch>
+      <Route path="/restaurants/:restId/menu" component={Restaurants} />
+      <Route
+        path="/restaurants/:restId/review"
+        render={({ match }) => (
+          <RestaurantReview pageType="review" match={match} />
+        )}
+      />
+      <Route path="/restaurants/:restId" component={Restaurants} />
+    </Switch>
+  );
 }
 
 export default connect(
