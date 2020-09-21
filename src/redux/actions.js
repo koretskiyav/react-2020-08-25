@@ -41,18 +41,18 @@ export const loadProducts = (restaurantId) => ({
 
 export const loadReviews = (restaurantId) => async (dispatch, getState) => {
   const state = getState();
-  const loading = reviewsLoadingSelector(state, { restaurantId });
-  const loaded = reviewsLoadedSelector(state, { restaurantId });
+  const loading = reviewsLoadingSelector(state, { id: restaurantId });
+  const loaded = reviewsLoadedSelector(state, { id: restaurantId });
 
   if (loading || loaded) return;
-  dispatch({ type: LOAD_REVIEWS + REQUEST, restaurantId });
+  dispatch({ type: LOAD_REVIEWS + REQUEST, id: restaurantId });
   try {
     const response = await fetch(
       `/api/reviews?id=${restaurantId}`
     ).then((res) => res.json());
-    dispatch({ type: LOAD_REVIEWS + SUCCESS, response, restaurantId });
+    dispatch({ type: LOAD_REVIEWS + SUCCESS, response, id: restaurantId });
   } catch (error) {
-    dispatch({ type: LOAD_REVIEWS + FAILURE, error, restaurantId });
+    dispatch({ type: LOAD_REVIEWS + FAILURE, error, id: restaurantId });
   }
 };
 

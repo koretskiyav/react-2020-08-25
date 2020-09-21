@@ -10,12 +10,12 @@ import Tabs from '../tabs';
 import { connect } from 'react-redux';
 import { averageRatingSelector } from '../../redux/selectors';
 
-const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
+const Restaurant = ({ id, name, averageRating }) => {
   const tabs = [
-    { title: 'Menu', content: <Menu menu={menu} restaurantId={id} /> },
+    { title: 'Menu', content: <Menu id={id} /> },
     {
       title: 'Reviews',
-      content: <Reviews reviews={reviews} restaurantId={id} />,
+      content: <Reviews id={id} />,
     },
   ];
 
