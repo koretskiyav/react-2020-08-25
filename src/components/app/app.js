@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from '../header';
 import Basket from '../basket';
+import Menu from '../menu';
 import RestaurantsPage from '../../pages/restaurants-page';
 
 export default class App extends PureComponent {

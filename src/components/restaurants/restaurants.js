@@ -18,7 +18,7 @@ const Restaurants = ({ restaurants, match, history }) => {
         {restaurants.map(({ id, name }, index) => (
           <NavLink
             key={id}
-            to={`/restaurants/${id}`}
+            to={`/restaurants/${id}/products`}
             className={styles.tab}
             activeClassName={styles.active}
           >
@@ -26,7 +26,7 @@ const Restaurants = ({ restaurants, match, history }) => {
           </NavLink>
         ))}
       </div>
-      <Restaurant {...restaurant} />
+      <Restaurant {...restaurant} match={match} />
     </>
   );
 };

@@ -46,5 +46,6 @@ export default connect(
   createStructuredSelector({
     total: totalSelector,
     orderProducts: orderProductsSelector,
+    id: totalSelector,
   })
 )(Basket);

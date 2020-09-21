@@ -27,7 +27,17 @@ export const usersLoadedSelector = (state) => state.users.loaded;
 export const restaurantsListSelector = mapToArray(restaurantsSelector);
 export const productAmountSelector = getById(orderSelector);
 export const productSelector = getById(productsSelector);
+
 const reviewSelector = getById(reviewsSelector);
+
+export const productToRestaurant = createSelector(
+  (_, { product }) => product.id,
+  restaurantsListSelector,
+  (id, restaurants) => {
+    console.log('update');
+    return restaurants.find((restaurant) => restaurant.menu.includes(id)).id;
+  }
+);
 
 export const reviewWitUserSelector = createSelector(
   reviewSelector,
