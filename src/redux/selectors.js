@@ -62,6 +62,18 @@ export const orderProductsSelector = createSelector(
   }
 );
 
+export const productRestaurantSelector = createSelector(
+  restaurantsListSelector,
+  (restaurants) => {
+    return restaurants.reduce((acc, restaurant) => {
+      for (const productId of restaurant.menu) {
+        acc[productId] = restaurant.id;
+      }
+      return acc;
+    }, {});
+  }
+);
+
 export const totalSelector = createSelector(
   orderProductsSelector,
   (orderProducts) =>
