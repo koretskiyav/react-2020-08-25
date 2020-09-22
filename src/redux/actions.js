@@ -18,7 +18,10 @@ import {
   reviewsLoadedSelector,
 } from './selectors';
 
-export const increment = (id) => ({ type: INCREMENT, payload: { id } });
+export const increment = (id, restId) => ({
+  type: INCREMENT,
+  payload: { id, restId },
+});
 export const decrement = (id) => ({ type: DECREMENT, payload: { id } });
 export const remove = (id) => ({ type: REMOVE, payload: { id } });
 

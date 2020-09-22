@@ -6,7 +6,11 @@ const productsSelector = (state) => state.products.entities;
 const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users.entities;
 
-const orderSelector = (state) => state.order;
+const orderSelector = (state) => {
+  console.log(state.order);
+
+  return state.order;
+};
 
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
 export const restaurantsLoadedSelector = (state) => state.restaurants.loaded;
@@ -57,6 +61,7 @@ export const orderProductsSelector = createSelector(
       .map((product) => ({
         product,
         amount: order[product.id],
+        restId: order.restId,
         subtotal: order[product.id] * product.price,
       }));
   }
