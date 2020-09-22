@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
-import { NavLink, Route, Switch } from 'react-router-dom';
+
 import Menu from '../menu';
 import Reviews from '../reviews';
 import Banner from '../banner';
@@ -10,7 +10,6 @@ import Rate from '../rate';
 import Tabs from '../tabs';
 import { connect } from 'react-redux';
 import { averageRatingSelector } from '../../redux/selectors';
-import styles from './restaurant.module.css';
 
 const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
   const tabs = [
@@ -19,7 +18,7 @@ const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
   ];
 
   return (
-    <>
+    <div>
       <Banner heading={name}>
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
@@ -32,7 +31,7 @@ const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
         path="/restaurants/:restId/reviews"
         render={() => <Reviews reviews={reviews} restaurantId={id} />}
       />
-    </>
+    </div>
   );
 };
 
