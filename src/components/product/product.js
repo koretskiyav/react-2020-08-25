@@ -5,11 +5,14 @@ import { createStructuredSelector } from 'reselect';
 
 import styles from './product.module.css';
 import { increment, decrement } from '../../redux/actions';
+import useCurrency from '../../hooks/use-currency';
 
 import Button from '../button';
 import { productAmountSelector, productSelector } from '../../redux/selectors';
 
 const Product = ({ product, amount = 0, increment, decrement }) => {
+  const { getCurrency } = useCurrency();
+
   if (!product) return null;
 
   return (
@@ -18,7 +21,7 @@ const Product = ({ product, amount = 0, increment, decrement }) => {
         <div>
           <h4 className={styles.title}>{product.name}</h4>
           <p className={styles.description}>{product.ingredients.join(', ')}</p>
-          <div className={styles.price}>{product.price} $</div>
+          <div className={styles.price}>{getCurrency(product.price)}</div>
         </div>
         <div>
           <div className={styles.counter}>
