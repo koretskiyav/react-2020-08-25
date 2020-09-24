@@ -12,12 +12,14 @@ import {
   REQUEST,
   SUCCESS,
   FAILURE,
+  SUBMIT_ORDER,
 } from './constants';
 import {
   usersLoadingSelector,
   usersLoadedSelector,
   reviewsLoadingSelector,
   reviewsLoadedSelector,
+  orderProductsSelector,
 } from './selectors';
 
 export const increment = (id) => ({ type: INCREMENT, payload: { id } });
@@ -67,4 +69,37 @@ export const loadUsers = (restaurantId) => async (dispatch, getState) => {
   if (loading || loaded) return;
 
   dispatch({ type: LOAD_USERS, CallAPI: '/api/users' });
+};
+
+export const submitOrder = () => async (dispatch, getState) => {
+  const state = getState();
+  dispatch({ type: SUBMIT_ORDER + REQUEST });
+
+  try {
+    const products = orderProductsSelector(state);
+
+    const response = await fetch(`/api/order`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(
+        products.map(({ product, amount }) => ({
+          id: product.id,
+          amount,
+        }))
+      ),
+    });
+
+    if (!response.ok) {
+      let result = await response.json();
+      throw new Error(result);
+    }
+
+    dispatch({ type: SUBMIT_ORDER + SUCCESS });
+    dispatch(replace('/success', 'Спасибо за заказ'));
+  } catch (error) {
+    dispatch({ type: SUBMIT_ORDER + FAILURE, error });
+    dispatch(replace('/error', error.message));
+  }
 };

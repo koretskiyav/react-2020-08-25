@@ -23,7 +23,19 @@ const App = () => {
           <Switch>
             <Route path="/checkout" component={Basket} />
             <Route path="/restaurants" component={RestaurantsPage} />
-            <Route path="/error" render={() => <h1>Error Page</h1>} />
+            <Route
+              path="/error"
+              render={(state) => (
+                <>
+                  <h1>Error Page</h1>
+                  <h2>{state.location.state}</h2>
+                </>
+              )}
+            />
+            <Route
+              path="/success"
+              render={(state) => <h1>{state.location.state}</h1>}
+            />
             <Redirect to="/restaurants" />
             {/* <Route path="/" render={() => <div>404 - not found</div>} /> */}
           </Switch>

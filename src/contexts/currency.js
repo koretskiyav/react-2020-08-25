@@ -5,9 +5,9 @@ CurrencyContext.displayName = 'CurrencyContext';
 export const CurrencyConsumer = CurrencyContext.Consumer;
 
 const valueAfterFormat = {
-  RUB: (value) => value,
-  USD: (value) => value / 77.12,
-  EUR: (value) => value / 89.99,
+  RUB: (value) => value * 77.12,
+  USD: (value) => value,
+  EUR: (value) => value / 0.86,
 };
 
 const currencyList = Object.keys(valueAfterFormat);
@@ -22,7 +22,7 @@ const getCurrency = (currency) => (value) => {
 };
 
 export const CurrencyProvider = (props) => {
-  const [currency, setCurrency] = useState(currencyList[0]);
+  const [currency, setCurrency] = useState(currencyList[1]);
   return (
     <CurrencyContext.Provider
       value={{
