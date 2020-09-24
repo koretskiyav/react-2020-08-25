@@ -4,12 +4,13 @@ import Header from '../header';
 import Basket from '../basket';
 import RestaurantsPage from '../../pages/restaurants-page';
 import { UserProvider } from '../../contexts/user';
-import { CurrencyProvider } from '../../contexts/currency';
+import { CurrencyProvider, currencyObj } from '../../contexts/currency';
 import NotFound from '../404/404';
 import Error from '../error/error';
+
 const App = () => {
   const [name, setName] = useState('Igor');
-  const [currency, setCurrency] = useState('1');
+  const [currency, setCurrency] = useState('USD');
 
   useEffect(() => {
     setInterval(() => {
@@ -19,7 +20,9 @@ const App = () => {
 
   return (
     <div>
-      <CurrencyProvider value={{ currency, setCurrency }}>
+      <CurrencyProvider
+        value={{ currency: currencyObj, value: currency, setCurrency }}
+      >
         <UserProvider value={{ name, setName }}>
           <Header />
           <Switch>

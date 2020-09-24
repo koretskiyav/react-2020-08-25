@@ -2,16 +2,28 @@ import React, { useContext } from 'react';
 import { currencyContext } from '../../contexts/currency';
 
 const Currency = () => {
-  const { сurrency, setCurrency } = useContext(currencyContext);
-
+  const { currency, setCurrency, value } = useContext(currencyContext) || {
+    currency: {},
+    value: 'USD',
+    setCurrency: () => {},
+  };
   return (
     <>
-      <select onChange={() => setCurrency('1')}>
-        <option value="28">UAH</option>
-        <option value="76">RUB</option>
-        <option value="1">USD</option>
+      <select
+        className="selector-currency"
+        onChange={(e) => {
+          e.preventDefault();
+          setCurrency(e.currentTarget.value);
+        }}
+      >
+        {Object.keys(currency).map((el, index) => {
+          return (
+            <option key={el} value={el} selected={value === el}>
+              {currency[el].name}
+            </option>
+          );
+        })}
       </select>
-      <p>{сurrency}</p>
     </>
   );
 };
