@@ -12,7 +12,7 @@ import Button from '../button';
 import { orderProductsSelector, totalSelector } from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user';
 import { purchaseGoods } from '../../redux/actions';
-import { currencyContext } from '../../contexts/currency';
+import { CurrencyPrice } from '../../hooks/currency-price';
 
 function Basket({
   title = 'Basket',
@@ -23,11 +23,6 @@ function Basket({
 }) {
   // console.log('render Basket');
   // const { name } = useContext(userContext);
-  const { currency, setCurrency, value } = useContext(currencyContext) || {
-    currency: {},
-    value: 'USD',
-    setCurrency: () => {},
-  };
 
   if (!total) {
     return (
@@ -60,16 +55,9 @@ function Basket({
         ))}
       </TransitionGroup>
       <hr className={styles.hr} />
-      <BasketRow
-        label="Sub-total"
-        content={`${total * currency[value].value}  ${currency[value].name}`}
-      />
+      <BasketRow label="Sub-total" content={CurrencyPrice(total)} />
       <BasketRow label="Delivery costs:" content="FREE" />
-      <BasketRow
-        label="total"
-        content={`${total * currency[value].value}  ${currency[value].name}`}
-        bold
-      />
+      <BasketRow label="total" content={CurrencyPrice(total)} bold />
       <Link to="/checkout">
         <Button
           primary
