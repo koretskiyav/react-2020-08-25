@@ -1,0 +1,20 @@
+.review-item-animation-enter {
+  opacity: 0;
+  background-color: green;
+  transform: translateY(-100%);
+}
+.review-item-animation-enter-active {
+  opacity: 1;
+  background-color: #fff;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms, background-color 500ms;
+}
+.review-item-animation-exit {
+  background-color: #fff;
+  opacity: 1;
+}
+.review-item-animation-exit-active {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 300ms, transform 300ms, background-color 500ms;
+}
