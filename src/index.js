@@ -8,14 +8,16 @@ import App from './components/app';
 
 import store from './redux/store';
 import history from './history';
-
+import { MoneyProvider } from './contexts/money';
 // DEV ONLY!!!
 window.store = store;
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <MoneyProvider>
+        <App />
+      </MoneyProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
