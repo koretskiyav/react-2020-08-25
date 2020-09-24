@@ -13,3 +13,12 @@
   right: 20px;
   top: 0;
 }
+
+.header li {
+  display: inline;
+  color: var(--white);
+}
+
+.active {
+  color: var(--orange);
+}

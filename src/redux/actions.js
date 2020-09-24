@@ -9,6 +9,7 @@ import {
   LOAD_REVIEWS,
   LOAD_PRODUCTS,
   LOAD_USERS,
+  SUBMIT,
   REQUEST,
   SUCCESS,
   FAILURE,
@@ -18,6 +19,8 @@ import {
   usersLoadedSelector,
   reviewsLoadingSelector,
   reviewsLoadedSelector,
+  submitBodySelector,
+  orderSubmittingSelector,
 } from './selectors';
 
 export const increment = (id) => ({ type: INCREMENT, payload: { id } });
@@ -67,4 +70,39 @@ export const loadUsers = (restaurantId) => async (dispatch, getState) => {
   if (loading || loaded) return;
 
   dispatch({ type: LOAD_USERS, CallAPI: '/api/users' });
+};
+
+export const submitOrder = () => async (dispatch, getState) => {
+  const state = getState();
+  if (state.router.location.pathname !== '/checkout') return;
+
+  const submitting = orderSubmittingSelector(state);
+
+  if (submitting) return;
+
+  const orderPayload = JSON.stringify(submitBodySelector(state));
+
+  const failureHandler = () => {
+    dispatch(replace('/error'));
+    dispatch({ type: SUBMIT + FAILURE });
+  };
+
+  dispatch({ type: SUBMIT + REQUEST });
+  try {
+    await fetch(`/api/order`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: orderPayload,
+    }).then((res) => {
+      if (res.status >= 400 && res.status < 600) {
+        failureHandler();
+      } else {
+        res.json();
+        dispatch({ type: SUBMIT + SUCCESS });
+        dispatch(replace('/submit/success'));
+      }
+    });
+  } catch (error) {
+    failureHandler();
+  }
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -9,13 +9,25 @@ import './basket.css';
 import BasketRow from './basket-row';
 import BasketItem from './basket-item';
 import Button from '../button';
-import { orderProductsSelector, totalSelector } from '../../redux/selectors';
+import Loader from '../loader';
+import {
+  orderProductsSelector,
+  totalSelector,
+  orderSubmittingSelector,
+} from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user';
+import { submitOrder } from '../../redux/actions';
+import { currencyContext } from '../../contexts/currency';
 
-function Basket({ title = 'Basket', total, orderProducts }) {
+function Basket({
+  title = 'Basket',
+  total,
+  orderProducts,
+  submitOrder,
+  orderSubmitting,
+}) {
   // console.log('render Basket');
-
-  // const { name } = useContext(userContext);
+  const { getAmount } = useContext(currencyContext);
 
   if (!total) {
     return (
@@ -41,21 +53,25 @@ function Basket({ title = 'Basket', total, orderProducts }) {
             <BasketItem
               product={product}
               amount={amount}
-              subtotal={subtotal}
+              subtotal={getAmount(subtotal)}
               restaurantId={restaurantId}
             />
           </CSSTransition>
         ))}
       </TransitionGroup>
       <hr className={styles.hr} />
-      <BasketRow label="Sub-total" content={`${total} $`} />
+      <BasketRow label="Sub-total" content={getAmount(total)} />
       <BasketRow label="Delivery costs:" content="FREE" />
-      <BasketRow label="total" content={`${total} $`} bold />
-      <Link to="/checkout">
-        <Button primary block>
-          checkout
-        </Button>
-      </Link>
+      <BasketRow label="total" content={getAmount(total)} bold />
+      {orderSubmitting ? (
+        <Loader />
+      ) : (
+        <Link to="/checkout">
+          <Button primary block onClick={submitOrder}>
+            checkout
+          </Button>
+        </Link>
+      )}
     </div>
   );
 }
@@ -64,5 +80,7 @@ export default connect(
   createStructuredSelector({
     total: totalSelector,
     orderProducts: orderProductsSelector,
-  })
+    orderSubmitting: orderSubmittingSelector,
+  }),
+  { submitOrder }
 )(Basket);
