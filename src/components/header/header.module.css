@@ -13,3 +13,7 @@
   right: 20px;
   top: 0;
 }
+
+button {
+  margin-left: 20px !important;
+}
