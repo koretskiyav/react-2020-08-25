@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { currencyContext } from '../../contexts/currency';
 
 import styles from './product.module.css';
 import { increment, decrement } from '../../redux/actions';
@@ -10,6 +11,11 @@ import Button from '../button';
 import { productAmountSelector, productSelector } from '../../redux/selectors';
 
 const Product = ({ product, amount = 0, increment, decrement }) => {
+  const { currency, setCurrency, value } = useContext(currencyContext) || {
+    currency: {},
+    value: 'USD',
+    setCurrency: () => {},
+  };
   if (!product) return null;
 
   return (
@@ -18,7 +24,9 @@ const Product = ({ product, amount = 0, increment, decrement }) => {
         <div>
           <h4 className={styles.title}>{product.name}</h4>
           <p className={styles.description}>{product.ingredients.join(', ')}</p>
-          <div className={styles.price}>{product.price} $</div>
+          <div className={styles.price}>
+            {product.price * currency[value].value + ` ${currency[value].name}`}
+          </div>
         </div>
         <div>
           <div className={styles.counter}>

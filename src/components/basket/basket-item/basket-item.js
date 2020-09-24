@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { increment, decrement, remove } from '../../../redux/actions';
 import Button from '../../button';
 import styles from './basket-item.module.css';
+import { currencyContext } from '../../../contexts/currency';
 
 function BasketItem({
   product,
@@ -15,6 +16,12 @@ function BasketItem({
   decrement,
   remove,
 }) {
+  const { currency, setCurrency, value } = useContext(currencyContext) || {
+    currency: {},
+    value: 'USD',
+    setCurrency: () => {},
+  };
+
   return (
     <div className={styles.basketItem}>
       <div className={styles.name}>
@@ -38,7 +45,9 @@ function BasketItem({
             small
           />
         </div>
-        <p className={cn(styles.count, styles.price)}>{subtotal} $</p>
+        <p className={cn(styles.count, styles.price)}>
+          {subtotal * currency[value].value + ` ${currency[value].name}`}
+        </p>
         <Button
           onClick={() => remove(product.id)}
           icon="delete"

@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import Restaurant from '../restaurant';
 import Tabs from '../tabs';
+import { Redirect } from 'react-router-dom';
 
 import { restaurantsListSelector } from '../../redux/selectors';
 
@@ -18,6 +19,7 @@ const Restaurants = ({ restaurants, match, history }) => {
 
   return (
     <>
+      <Redirect exact from="/restaurants/" to={tabs[0].to} />
       <Tabs tabs={tabs} />
       {restId && <Restaurant {...restaurant} />}
     </>
