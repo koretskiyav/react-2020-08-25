@@ -12,7 +12,6 @@ import {
   REQUEST,
   SUCCESS,
   FAILURE,
-  PURCHASE_GOODS,
   ERROR_REQUEST,
 } from './constants';
 import {

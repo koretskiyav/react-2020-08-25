@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { currencyContext } from '../contexts/currency';
 
 export const CurrencyPrice = (price) => {
-  const { currency, setCurrency, value } = useContext(currencyContext) || {
+  const { currency, value } = useContext(currencyContext) || {
     currency: {},
     value: 'USD',
     setCurrency: () => {},
