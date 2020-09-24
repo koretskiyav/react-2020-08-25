@@ -15,3 +15,5 @@ export const LOAD_USERS = 'LOAD_USERS';
 export const USD = 1;
 export const USDRUB = 77.13;
 export const USDEUR = 0.86; 
+
+export const CHECKOUT = 'CHECKOUT';
