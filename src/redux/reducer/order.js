@@ -1,8 +1,8 @@
-import { DECREMENT, INCREMENT, REMOVE } from '../constants';
+import { DECREMENT, INCREMENT, REMOVE, ERROR_REQUEST } from '../constants';
 
 // { [productId]: amount }
-export default (state = {}, action) => {
-  const { type, payload } = action;
+export default (state = { error: 'Error Page' }, action) => {
+  const { type, payload, response } = action;
   switch (type) {
     case INCREMENT:
       return {
@@ -18,6 +18,11 @@ export default (state = {}, action) => {
       return {
         ...state,
         [payload.id]: 0,
+      };
+    case ERROR_REQUEST:
+      return {
+        ...state,
+        error: response,
       };
     default:
       return state;

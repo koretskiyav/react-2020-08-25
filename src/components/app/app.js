@@ -4,9 +4,12 @@ import Header from '../header';
 import Basket from '../basket';
 import RestaurantsPage from '../../pages/restaurants-page';
 import { UserProvider } from '../../contexts/user';
-
+import { CurrencyProvider } from '../../contexts/currency';
+import NotFound from '../404/404';
+import Error from '../error/error';
 const App = () => {
   const [name, setName] = useState('Igor');
+  const [currency, setCurrency] = useState('1');
 
   useEffect(() => {
     setInterval(() => {
@@ -16,16 +19,19 @@ const App = () => {
 
   return (
     <div>
-      <UserProvider value={{ name, setName }}>
-        <Header />
-        <Switch>
-          <Route path="/checkout" component={Basket} />
-          <Route path="/restaurants" component={RestaurantsPage} />
-          <Redirect exact from="/" to={`/restaurants/`} />
-          <Route path="/error" render={() => <h1>Error Page</h1>} />
-          <Route path="/" render={() => <div>404 - not found</div>} />
-        </Switch>
-      </UserProvider>
+      <CurrencyProvider value={{ currency, setCurrency }}>
+        <UserProvider value={{ name, setName }}>
+          <Header />
+          <Switch>
+            <Route path="/checkout" component={Basket} />
+            <Route path="/restaurants" component={RestaurantsPage} />
+            <Redirect exact from="/" to={`/restaurants/`} />
+            <Route path="/accepted" render={() => <h1>Спасибо за заказ</h1>} />
+            <Route path="/error" component={Error} />
+            <Route path="/" render={() => <NotFound message="Not Found" />} />
+          </Switch>
+        </UserProvider>
+      </CurrencyProvider>
     </div>
   );
 };

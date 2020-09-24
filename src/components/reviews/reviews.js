@@ -34,6 +34,7 @@ const Reviews = ({
       <TransitionGroup>
         {reviews.map((id) => (
           <CSSTransition
+            key={id}
             timeout={500}
             classNames={{
               enter: styles.reviewItemAnimationEnter,

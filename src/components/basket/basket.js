@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -11,10 +11,16 @@ import BasketItem from './basket-item';
 import Button from '../button';
 import { orderProductsSelector, totalSelector } from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user';
+import { purchaseGoods } from '../../redux/actions';
 
-function Basket({ title = 'Basket', total, orderProducts }) {
+function Basket({
+  title = 'Basket',
+  total,
+  orderProducts,
+  purchaseGoods,
+  match,
+}) {
   // console.log('render Basket');
-
   // const { name } = useContext(userContext);
 
   if (!total) {
@@ -52,7 +58,15 @@ function Basket({ title = 'Basket', total, orderProducts }) {
       <BasketRow label="Delivery costs:" content="FREE" />
       <BasketRow label="total" content={`${total} $`} bold />
       <Link to="/checkout">
-        <Button primary block>
+        <Button
+          primary
+          block
+          onClick={() => {
+            return match.path === '/checkout'
+              ? purchaseGoods(orderProducts)
+              : null;
+          }}
+        >
           checkout
         </Button>
       </Link>
@@ -60,9 +74,12 @@ function Basket({ title = 'Basket', total, orderProducts }) {
   );
 }
 
-export default connect(
-  createStructuredSelector({
-    total: totalSelector,
-    orderProducts: orderProductsSelector,
-  })
-)(Basket);
+export default withRouter(
+  connect(
+    createStructuredSelector({
+      total: totalSelector,
+      orderProducts: orderProductsSelector,
+    }),
+    { purchaseGoods }
+  )(Basket)
+);

@@ -12,6 +12,8 @@ import {
   REQUEST,
   SUCCESS,
   FAILURE,
+  PURCHASE_GOODS,
+  ERROR_REQUEST,
 } from './constants';
 import {
   usersLoadingSelector,
@@ -67,4 +69,27 @@ export const loadUsers = (restaurantId) => async (dispatch, getState) => {
   if (loading || loaded) return;
 
   dispatch({ type: LOAD_USERS, CallAPI: '/api/users' });
+};
+
+export const purchaseGoods = (orderProducts) => async (dispatch, getState) => {
+  const dataOrders = orderProducts.map((order) => {
+    return {
+      id: order.product.id,
+      amount: order.amount,
+    };
+  });
+  try {
+    const response = await fetch('/api/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dataOrders),
+    }).then((res) => res.json());
+    getState().order = [];
+    dispatch({ type: ERROR_REQUEST, response });
+    return response === 'ok'
+      ? dispatch(replace('/accepted'))
+      : dispatch(replace('/error'));
+  } catch (error) {
+    dispatch(replace('/error'));
+  }
 };
