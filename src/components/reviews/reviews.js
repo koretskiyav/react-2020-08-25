@@ -3,8 +3,12 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReviewForm from './review-form';
-import Review from './review';
+import Reviews from './reviews';
 import styles from './reviews.module.css';
+
+
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import './rewiews.css';
 
 import { loadReviews, loadUsers } from '../../redux/actions';
 import {
@@ -30,12 +34,21 @@ const Reviews = ({
   if (!usersLoaded || !reviewsLoaded) return <Loader />;
 
   return (
-    <div className={styles.reviews}>
-      {reviews.map((id) => (
-        <Review key={id} id={id} />
-      ))}
-      <ReviewForm restaurantId={restaurantId} />
-    </div>
+
+    <TransitionGroup>
+      <CSSTransition
+        key={id}
+        timeout={500}
+        classNames="reviews-item-animation"
+      ></CSSTransition>
+      <div className={styles.reviews}>
+        {reviews.map((id) => (
+          <Review key={id} id={id} />
+        ))}
+        <ReviewForm restaurantId={restaurantId} />
+      </div>
+      </CSSTransition>
+    </TransitionGroup >
   );
 };
 
