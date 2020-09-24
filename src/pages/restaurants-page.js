@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Restaurants from '../components/restaurants';
 import Loader from '../components/loader';
 import {
-  restaurantsListSelector,
+  firstLoadedRestaurantIdSelector,
   restaurantsLoadingSelector,
   restaurantsLoadedSelector,
 } from '../redux/selectors';
@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 function RestaurantsPage({
-  restaurants,
+  firstLoadedRestaurantId,
   loadRestaurants,
   loading,
   loaded,
@@ -29,7 +29,11 @@ function RestaurantsPage({
     return (
       <>
         <Restaurants match={match} history={history} />
-        <h2 style={{ textAlign: 'center' }}>Select restaurant</h2>
+        <Redirect
+          from="/restaurants"
+          to={`/restaurants/${firstLoadedRestaurantId}`}
+        />
+        {/*<h2 style={{ textAlign: 'center' }}>Select restaurant</h2>*/}
       </>
     );
   }
@@ -39,7 +43,7 @@ function RestaurantsPage({
 
 export default connect(
   createStructuredSelector({
-    restaurants: restaurantsListSelector,
+    firstLoadedRestaurantId: firstLoadedRestaurantIdSelector,
     loading: restaurantsLoadingSelector,
     loaded: restaurantsLoadedSelector,
   }),
