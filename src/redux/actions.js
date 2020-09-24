@@ -12,6 +12,7 @@ import {
   REQUEST,
   SUCCESS,
   FAILURE,
+  CHECKOUT
 } from './constants';
 import {
   usersLoadingSelector,
@@ -68,3 +69,9 @@ export const loadUsers = (restaurantId) => async (dispatch, getState) => {
 
   dispatch({ type: LOAD_USERS, CallAPI: '/api/users' });
 };
+
+export const checkout = (orderedProducts) => ({
+  type: CHECKOUT,
+  PostAPI: '/api/order',
+  payload: orderedProducts.map(product => ({amount: product.amount, id: product.product.id}))
+})

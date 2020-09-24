@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { checkout } from '../../redux/actions';
 
 import styles from './basket.module.css';
 import './basket.css';
@@ -11,11 +12,9 @@ import BasketItem from './basket-item';
 import Button from '../button';
 import { orderProductsSelector, totalSelector } from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user';
+import { CurrencyConsumer } from '../../contexts/currency';
 
-function Basket({ title = 'Basket', total, orderProducts }) {
-  // console.log('render Basket');
-
-  // const { name } = useContext(userContext);
+function Basket({ title = 'Basket', total, orderProducts, match, history, checkout }) {
 
   if (!total) {
     return (
@@ -48,14 +47,25 @@ function Basket({ title = 'Basket', total, orderProducts }) {
         ))}
       </TransitionGroup>
       <hr className={styles.hr} />
-      <BasketRow label="Sub-total" content={`${total} $`} />
-      <BasketRow label="Delivery costs:" content="FREE" />
-      <BasketRow label="total" content={`${total} $`} bold />
-      <Link to="/checkout">
-        <Button primary block>
-          checkout
-        </Button>
-      </Link>
+      <CurrencyConsumer>{({ currency }) => {
+        return (
+          <div>
+            <BasketRow label="Sub-total" content={`${(total*currency.exchange).toFixed(2)} ${currency.sign}`} />
+            <BasketRow label="Delivery costs:" content="FREE" />
+            <BasketRow label="total" content={`${(total*currency.exchange).toFixed(2)} ${currency.sign}`} bold />
+            <Link to="/checkout">
+              <Button primary block onClick={() => {
+                if (match && match.isExact){
+                    checkout(orderProducts);
+                }
+              }}>
+                checkout
+              </Button>
+            </Link>
+          </div>
+        )
+      }
+      }</CurrencyConsumer>
     </div>
   );
 }
@@ -64,5 +74,6 @@ export default connect(
   createStructuredSelector({
     total: totalSelector,
     orderProducts: orderProductsSelector,
-  })
+  }),
+  { checkout }
 )(Basket);
