@@ -1,4 +1,10 @@
-import { DECREMENT, INCREMENT, REMOVE } from '../constants';
+import {
+  DECREMENT,
+  INCREMENT,
+  LOAD_BASKET,
+  REMOVE,
+  SUCCESS,
+} from '../constants';
 
 // { [productId]: amount }
 export default (state = {}, action) => {
@@ -19,6 +25,8 @@ export default (state = {}, action) => {
         ...state,
         [payload.id]: 0,
       };
+    case LOAD_BASKET + SUCCESS:
+      return {};
     default:
       return state;
   }

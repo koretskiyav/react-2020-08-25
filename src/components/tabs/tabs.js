@@ -7,7 +7,7 @@ import styles from './tabs.module.css';
 const Tabs = ({ tabs }) => {
   return (
     <div className={styles.tabs}>
-      {tabs.map(({ title, to }) => (
+      {tabs.map(({ title, to, state }) => (
         <NavLink
           to={to}
           key={title}

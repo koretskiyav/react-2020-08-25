@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Restaurants from '../components/restaurants';
 import Loader from '../components/loader';
 import {
@@ -11,14 +11,7 @@ import { loadRestaurants } from '../redux/actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-function RestaurantsPage({
-  restaurants,
-  loadRestaurants,
-  loading,
-  loaded,
-  match,
-  history,
-}) {
+function RestaurantsPage({ loadRestaurants, loading, loaded, match }) {
   useEffect(() => {
     if (!loading && !loaded) loadRestaurants();
   }, []); // eslint-disable-line
@@ -26,22 +19,17 @@ function RestaurantsPage({
   if (loading || !loaded) return <Loader />;
 
   if (match.isExact) {
-    return (
-      <>
-        <Restaurants match={match} history={history} />
-        <h2 style={{ textAlign: 'center' }}>Select restaurant</h2>
-      </>
-    );
+    return <Redirect from="/restaurants" to={`/restaurants/restaurant`} />;
   }
-
   return <Route path="/restaurants/:restId" component={Restaurants} />;
 }
 
+const MemoizedRestaurantsPage = React.memo(RestaurantsPage);
+
 export default connect(
   createStructuredSelector({
-    restaurants: restaurantsListSelector,
     loading: restaurantsLoadingSelector,
     loaded: restaurantsLoadedSelector,
   }),
   { loadRestaurants }
-)(RestaurantsPage);
+)(MemoizedRestaurantsPage);

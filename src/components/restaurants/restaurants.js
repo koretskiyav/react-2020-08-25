@@ -7,19 +7,20 @@ import Tabs from '../tabs';
 
 import { restaurantsListSelector } from '../../redux/selectors';
 
-const Restaurants = ({ restaurants, match, history }) => {
+const Restaurants = ({ restaurants, match }) => {
   const { restId } = match.params;
-  const restaurant = restaurants.find((restaurant) => restaurant.id === restId);
-
+  const restaurantFound = restaurants.find(
+    (restaurant) => restaurant.id === restId
+  );
   const tabs = restaurants.map(({ id, name }) => ({
     title: name,
     to: `/restaurants/${id}/menu`,
   }));
-
+  const restaurantDefault = restaurantFound ? restaurantFound : restaurants[0];
   return (
     <>
       <Tabs tabs={tabs} />
-      {restId && <Restaurant {...restaurant} />}
+      <Restaurant {...restaurantDefault} />
     </>
   );
 };

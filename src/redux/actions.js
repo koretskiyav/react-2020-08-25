@@ -1,4 +1,4 @@
-import { replace } from 'connected-react-router';
+import { replace, push } from 'connected-react-router';
 
 import {
   INCREMENT,
@@ -12,12 +12,15 @@ import {
   REQUEST,
   SUCCESS,
   FAILURE,
+  LOAD_BASKET,
 } from './constants';
 import {
   usersLoadingSelector,
   usersLoadedSelector,
   reviewsLoadingSelector,
   reviewsLoadedSelector,
+  basketLoadingSelector,
+  basketLoadedSelector,
 } from './selectors';
 
 export const increment = (id) => ({ type: INCREMENT, payload: { id } });
@@ -40,6 +43,35 @@ export const loadProducts = (restaurantId) => ({
   CallAPI: `/api/products?id=${restaurantId}`,
   restaurantId,
 });
+export const loadBasket = (orderProducts) => async (dispatch, getState) => {
+  const state = getState();
+  const loading = basketLoadingSelector(state);
+  const loaded = basketLoadedSelector(state);
+
+  if (loading || loaded) return;
+
+  dispatch({ type: LOAD_BASKET + REQUEST });
+  const order = orderProducts.map((product) => ({
+    id: product.product.id,
+    amount: product.amount,
+  }));
+  try {
+    const response = await fetch('/api/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(order),
+    }).then((res) => res.json());
+    console.log(response);
+    if (response !== 'ok') {
+      throw new Error(response); // (*)
+    }
+    dispatch({ type: LOAD_BASKET + SUCCESS });
+    dispatch(replace('/thankfulpage'));
+  } catch (error) {
+    dispatch({ type: LOAD_BASKET + FAILURE, error: error.message });
+    dispatch(push('/error'));
+  }
+};
 
 export const loadReviews = (restaurantId) => async (dispatch, getState) => {
   const state = getState();
