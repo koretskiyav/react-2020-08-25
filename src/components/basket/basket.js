@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -11,11 +11,18 @@ import BasketItem from './basket-item';
 import Button from '../button';
 import { orderProductsSelector, totalSelector } from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user';
+import { currencyContext } from '../../contexts/currency';
 
 function Basket({ title = 'Basket', total, orderProducts }) {
   // console.log('render Basket');
 
   // const { name } = useContext(userContext);
+
+  const { currency, setCurrency, value } = useContext(currencyContext) || {
+    currency: {},
+    value: 'USD',
+    setCurrency: () => {},
+  };
 
   if (!total) {
     return (
@@ -48,9 +55,16 @@ function Basket({ title = 'Basket', total, orderProducts }) {
         ))}
       </TransitionGroup>
       <hr className={styles.hr} />
-      <BasketRow label="Sub-total" content={`${total} $`} />
+      <BasketRow
+        label="Sub-total"
+        content={`${total * currency[value].value}  ${currency[value].name}`}
+      />
       <BasketRow label="Delivery costs:" content="FREE" />
-      <BasketRow label="total" content={`${total} $`} bold />
+      <BasketRow
+        label="total"
+        content={`${total * currency[value].value}  ${currency[value].name}`}
+        bold
+      />
       <Link to="/checkout">
         <Button primary block>
           checkout

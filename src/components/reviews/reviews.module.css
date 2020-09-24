@@ -4,3 +4,21 @@
   max-width: 884px;
   width: 100%;
 }
+
+.reviewEnter {
+  opacity: 0;
+  transform: scaleX(-1);
+}
+.reviewEnterActive {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms, transform 500ms;
+}
+.reviewEnterExit {
+  opacity: 1;
+}
+.reviewExitActive {
+  opacity: 0;
+  transform: scaleX(1);
+  transition: opacity 500ms, transform 500ms;
+}
