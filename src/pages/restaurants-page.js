@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Restaurants from '../components/restaurants';
 import Loader from '../components/loader';
 import {
@@ -26,6 +26,10 @@ function RestaurantsPage({
   if (loading || !loaded) return <Loader />;
 
   if (match.isExact) {
+    if (restaurants && restaurants.length > 0){
+      return <Redirect to={`/restaurants/${restaurants[0].id}`} />
+    }
+
     return (
       <>
         <Restaurants match={match} history={history} />

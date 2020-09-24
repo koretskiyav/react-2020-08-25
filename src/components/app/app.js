@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import Header from '../header';
 import Basket from '../basket';
 import RestaurantsPage from '../../pages/restaurants-page';
+import RedirectPage from '../../pages/redirect-page';
 import { UserProvider } from '../../contexts/user';
-
 const App = () => {
   const [name, setName] = useState('Igor');
 
@@ -22,7 +22,7 @@ const App = () => {
           <Route path="/checkout" component={Basket} />
           <Route path="/restaurants" component={RestaurantsPage} />
           <Route path="/error" render={() => <h1>Error Page</h1>} />
-          <Route path="/" render={() => <div>404 - not found</div>} />
+          <Route path="/" component={RedirectPage} />
         </Switch>
       </UserProvider>
     </div>
