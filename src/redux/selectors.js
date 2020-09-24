@@ -5,11 +5,17 @@ const restaurantsSelector = (state) => state.restaurants.entities;
 const productsSelector = (state) => state.products.entities;
 const reviewsSelector = (state) => state.reviews.entities;
 const usersSelector = (state) => state.users.entities;
+export const location = (path) => (state) =>
+  state.router.location.pathname === path ? true : false;
 
 const orderSelector = (state) => state.order;
 
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
 export const restaurantsLoadedSelector = (state) => state.restaurants.loaded;
+
+export const basketLoadingSelector = (state) => state.basket.loading;
+export const basketLoadedSelector = (state) => state.basket.loaded;
+export const basketErrorSelector = (state) => state.basket.error;
 
 export const productsLoadingSelector = (state, props) =>
   state.products.loading[props.restaurantId];
