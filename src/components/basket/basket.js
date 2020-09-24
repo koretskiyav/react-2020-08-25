@@ -11,8 +11,10 @@ import BasketItem from './basket-item';
 import Button from '../button';
 import { orderProductsSelector, totalSelector } from '../../redux/selectors';
 import { UserConsumer } from '../../contexts/user';
+import useCurrency from '../../hooks/use-currency';
 
 function Basket({ title = 'Basket', total, orderProducts }) {
+  const { getCurrency } = useCurrency();
   // console.log('render Basket');
 
   // const { name } = useContext(userContext);
@@ -48,9 +50,9 @@ function Basket({ title = 'Basket', total, orderProducts }) {
         ))}
       </TransitionGroup>
       <hr className={styles.hr} />
-      <BasketRow label="Sub-total" content={`${total} $`} />
+      <BasketRow label="Sub-total" content={`${getCurrency(total)}`} />
       <BasketRow label="Delivery costs:" content="FREE" />
-      <BasketRow label="total" content={`${total} $`} bold />
+      <BasketRow label="total" content={`${getCurrency(total)}`} bold />
       <Link to="/checkout">
         <Button primary block>
           checkout
