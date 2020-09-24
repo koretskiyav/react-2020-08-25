@@ -24,6 +24,13 @@ export const reviewsLoadedSelector = (state, props) =>
 export const usersLoadingSelector = (state) => state.users.loading;
 export const usersLoadedSelector = (state) => state.users.loaded;
 
+export const orderLoadingSelector = (state) => state.basket.loading;
+export const orderLoadedSelector = (state) => state.basket.loaded;
+
+export const globalErrorSelector = (state) => state.error.message;
+
+export const pathnameSelector = (state) => state.router.location.pathname;
+
 export const restaurantsListSelector = mapToArray(restaurantsSelector);
 export const productAmountSelector = getById(orderSelector);
 export const productSelector = getById(productsSelector);
@@ -81,4 +88,9 @@ export const totalSelector = createSelector(
   orderProductsSelector,
   (orderProducts) =>
     orderProducts.reduce((acc, { subtotal }) => acc + subtotal, 0)
+);
+
+export const basketCheckoutSelector = createSelector(
+  orderSelector,
+  (products) => Object.entries(products).map(([id, amount]) => ({ id, amount }))
 );
