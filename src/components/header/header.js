@@ -23,7 +23,6 @@ const Header = () => {
           </option>
         ))}
       </select>
-      <h2 onClick={() => setCurrency('USD')}>USD</h2>
     </header>
   );
 };
