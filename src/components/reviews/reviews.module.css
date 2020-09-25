@@ -4,3 +4,20 @@
   max-width: 884px;
   width: 100%;
 }
+.reviewItemAnimationEnter {
+  opacity: 0;
+  transform: scaleX(-1);
+}
+.reviewItemAnimationEnterActive {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.reviewItemAnimationEnterExit {
+  opacity: 1;
+}
+.reviewItemAnimationEnterExitActive {
+  opacity: 0;
+  transform: scaleX(1);
+  transition: opacity 300ms, transform 300ms;
+}

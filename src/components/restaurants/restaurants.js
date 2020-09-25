@@ -6,11 +6,11 @@ import Restaurant from '../restaurant';
 import Tabs from '../tabs';
 
 import { restaurantsListSelector } from '../../redux/selectors';
+import { Redirect } from 'react-router-dom';
 
 const Restaurants = ({ restaurants, match, history }) => {
   const { restId } = match.params;
   const restaurant = restaurants.find((restaurant) => restaurant.id === restId);
-
   const tabs = restaurants.map(({ id, name }) => ({
     title: name,
     to: `/restaurants/${id}/menu`,
@@ -18,6 +18,7 @@ const Restaurants = ({ restaurants, match, history }) => {
 
   return (
     <>
+      <Redirect exact from="/restaurants/" to={tabs[0].to} />
       <Tabs tabs={tabs} />
       {restId && <Restaurant {...restaurant} />}
     </>

@@ -8,6 +8,8 @@ const usersSelector = (state) => state.users.entities;
 
 const orderSelector = (state) => state.order;
 
+export const errorMessageCheckout = (state) => state.order.error;
+
 export const restaurantsLoadingSelector = (state) => state.restaurants.loading;
 export const restaurantsLoadedSelector = (state) => state.restaurants.loaded;
 
