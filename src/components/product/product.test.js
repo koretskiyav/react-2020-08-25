@@ -38,6 +38,12 @@ describe('Product', () => {
     decrease();
     expect(getAmount()).toBe('3');
   });
+  it('should decrement 2 amount', () => {
+    wrapper = mount(<Product product={product} initialCount={4} />);
+    decrease();
+    decrease();
+    expect(getAmount()).toBe('2');
+  });
   it("shouldn't decrement with 0 amount", () => {
     wrapper = mount(<Product product={product} />);
     decrease();
